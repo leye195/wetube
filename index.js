@@ -4,5 +4,5 @@ const app=express();
 
 const port = 8080;
 http.createServer(app.listen(port),()=>{
-    console.log(`Express Server is running PORT:${port}`);
+    console.log(`Express Server PORT:${port}`);
 })
