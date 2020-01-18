@@ -1,8 +1,8 @@
 extends ./layouts/main.pug
 block content
     .form-container
-        form(action=routes.videos+routes.editVideo,method="post")
-            input(type="text",name="title",placeholder="title")
-            textarea(name="description", cols="30", rows="5",placeholder="description")
+        form(action=`${routes.editVideo(video._id)}`,method="post")
+            input(type="text",name="title",placeholder="title",value=video.title)
+            textarea(name="description", cols="30", rows="5",placeholder="description")=video.description
             input(type="submit",value="Upload Video")
         a.delete-video(href=routes.videos+routes.deleteVideo) Delete Video

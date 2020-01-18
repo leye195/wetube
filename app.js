@@ -12,7 +12,7 @@ import globalRouter from './routers/globalRouter';
 import userRouter from './routers/userRouter';
 import videoRouter from './routers/videoRouter';
 import routes from './routes';
-import { localMiddleware } from './middlewares';
+import {localMiddleware} from './middlewares';
 
 const app=express();
 app.use(helmet()); //for security
@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({extended:true}));// parse application/x-www-form-
 app.use(bodyParser.json());// parse application/json
 app.use(cors());//cross-domain
 app.use('/static',express.static(__dirname + '/public'));
+app.use('/upload',express.static(__dirname + '/upload'));
 app.use(morgan("dev"));//common,tiny,dev
 app.use(localMiddleware);
 //독점적으로 url을 사용할수 있게 설정

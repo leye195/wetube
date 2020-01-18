@@ -1,6 +1,11 @@
 import http from 'http';
+import dotenv from 'dotenv';
+import './db';
 import app from './app';
-const PORT = 8080;
+dotenv.config();
+import "./models/video";
+import "./models/comment";
+const PORT = process.env.PORT || 8080;
 const handleListening=()=>{
     console.log(`Express Server Listening on: http://localhost:${PORT}`);
 }
