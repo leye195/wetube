@@ -1,32 +1,33 @@
-import express from 'express';
-import routes from '../routes';
+import express from "express";
+import routes from "../routes";
 import {
-    videos, 
-    videoDetail,  
-    deleteVideo, 
-    getUpload, 
-    postUpload,
-    getEditVideo,
-    postEditVideo
-} from '../controller/videoController';
-import { uploadVideoMiddleware } from '../middlewares';
-const videoRouter=express.Router();
+  videos,
+  videoDetail,
+  deleteVideo,
+  getUpload,
+  postUpload,
+  getEditVideo,
+  postEditVideo
+} from "../controller/videoController";
+import { uploadVideoMiddleware, onlyPrivate } from "../middlewares";
 
-//Home
-videoRouter.get(routes.home,videos);
+const videoRouter = express.Router();
 
-//Upload Video
-videoRouter.get(routes.upload,getUpload);
-videoRouter.post(routes.upload,uploadVideoMiddleware,postUpload)
+// Home
+videoRouter.get(routes.home, videos);
 
-//Detail
-videoRouter.get(routes.videoDetail(),videoDetail);
+// Upload Video
+videoRouter.get(routes.upload, onlyPrivate, getUpload);
+videoRouter.post(routes.upload, onlyPrivate, uploadVideoMiddleware, postUpload);
 
-//Edit Video
-videoRouter.get(routes.editVideo(),getEditVideo);
-videoRouter.post(routes.editVideo(),postEditVideo);
+// Detail
+videoRouter.get(routes.videoDetail(), videoDetail);
 
-//Delete Video
-videoRouter.get(routes.deleteVideo(),deleteVideo);
+// Edit Video
+videoRouter.get(routes.editVideo(), onlyPrivate, getEditVideo);
+videoRouter.post(routes.editVideo(), onlyPrivate, postEditVideo);
+
+// Delete Video
+videoRouter.get(routes.deleteVideo(), onlyPrivate, deleteVideo);
 
 export default videoRouter;

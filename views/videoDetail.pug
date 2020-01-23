@@ -1,9 +1,19 @@
 extends ./layouts/main.pug
 block content
-    .video__player
-        video(src=`/${video.fileUrl}`,controls=true)
-    .video__info
-        a(href=routes.editVideo(video._id)) Edit Video
-        h1.video__title=video.title
-        p.video__description=video.description
-        p.video__view=video.view
+    .video-detail__container
+        .video__player
+            video(src=`/${video.fileUrl}`,controls=true)
+        .video__info
+            a(href=routes.editVideo(video._id)) 
+                button Edit Video
+            h1.video__title=video.title
+            if video.view===1
+                p.video__view=`1 view`
+            else
+                p.video__view=`${video.view} views`
+            p.video__description=video.description
+        .video__comment
+            if video.comments.length===1
+                span.video__comment-number 1 comment
+            else    
+                span.video__comment-number #{video.comments.length} comments

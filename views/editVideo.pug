@@ -5,4 +5,5 @@ block content
             input(type="text",name="title",placeholder="title",value=video.title)
             textarea(name="description", cols="30", rows="5",placeholder="description")=video.description
             input(type="submit",value="Upload Video")
-        a.delete-video(href=routes.videos+routes.deleteVideo) Delete Video
+        a.delete-video(href=routes.deleteVideo(video._id)) 
+            button.delete Delete Video

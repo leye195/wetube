@@ -1,0 +1,30 @@
+.social-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  button {
+    width: 100%;
+    max-width: 320px;
+    a {
+      color: $white;
+    }
+  }
+  .social-login--github {
+    background-color: $black;
+    color: $white;
+  }
+  .social-login--google {
+    background-color: $orange;
+
+    i {
+      padding: 5px;
+    }
+  }
+  span {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+}
