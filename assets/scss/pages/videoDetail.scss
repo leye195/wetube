@@ -39,7 +39,13 @@
       font-size: 16px;
     }
   }
+  .video__author,
   .video__comment {
-    margin-top: 5px;
+    margin-top: 10px;
+  }
+  .video__author {
+    a {
+      color: $black;
+    }
   }
 }

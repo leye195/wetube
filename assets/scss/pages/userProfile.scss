@@ -1,0 +1,23 @@
+.user-profile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  .user-profile__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .profile__username {
+      font-size: 16px;
+      margin-top: 15px;
+    }
+  }
+  .user-profile__btns {
+    margin: 10px;
+    button {
+      border-radius: 5px;
+      font-weight: 500;
+    }
+  }
+}

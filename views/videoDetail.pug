@@ -4,16 +4,22 @@ block content
         .video__player
             video(src=`/${video.fileUrl}`,controls=true)
         .video__info
-            a(href=routes.editVideo(video._id)) 
-                button Edit Video
+            if loggedUser
+                if loggedUser.id === video.creator.id 
+                    a(href=routes.editVideo(video._id)) 
+                        button Edit Video
             h1.video__title=video.title
             if video.view===1
                 p.video__view=`1 view`
             else
                 p.video__view=`${video.view} views`
             p.video__description=video.description
+        .video__author
+            | Uploaded By 
+            a(href=routes.userDetail(video.creator._id))=video.creator.name
         .video__comment
             if video.comments.length===1
                 span.video__comment-number 1 comment
             else    
                 span.video__comment-number #{video.comments.length} comments
+        

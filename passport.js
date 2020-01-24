@@ -1,8 +1,14 @@
 import passport from "passport";
 import githubStrategy from "passport-github";
+import naverStrategy from "passport-naver";
+import kakaoStrategy from "passport-kakao";
 import User from "./models/user";
 import dotenv from "dotenv";
-import { githubLoginCallback } from "./controller/userController";
+import {
+  githubLoginCallback,
+  naverLoginCallback,
+  kakaoLoginCallback
+} from "./controller/userController";
 import routes from "./routes";
 dotenv.config();
 //strategy랑 필요한 것들을 넣어줌
@@ -18,6 +24,27 @@ passport.use(
       callbackURL: `http://localhost:8080${routes.githubCallback}`
     },
     githubLoginCallback
+  )
+);
+//naver strategy
+passport.use(
+  new naverStrategy(
+    {
+      clientID: process.env.N_CLIENTID,
+      clientSecret: process.env.N_CLIENTSECRET,
+      callbackURL: `http://localhost:8080${routes.naverCallback}`
+    },
+    naverLoginCallback
+  )
+);
+//kakao strategy
+passport.use(
+  new kakaoStrategy(
+    {
+      clientID: process.env.K_CLIENTID,
+      callbackURL: `http://localhost:8080${routes.kakaoCallback}`
+    },
+    kakaoLoginCallback
   )
 );
 //use static serialize and deserializ of model for passport session support

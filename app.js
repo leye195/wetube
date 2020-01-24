@@ -7,7 +7,7 @@ import cors from "cors";
 import path from "path";
 import passport from "passport";
 import expressSession from "express-session";
-import mongoStore, { MongoStore } from "connect-mongo";
+import mongoStore from "connect-mongo";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import globalRouter from "./routers/globalRouter";

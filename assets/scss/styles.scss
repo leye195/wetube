@@ -1,5 +1,7 @@
 @import "./config/variables.scss";
 @import "./config/reset.scss";
+@import "./config/utill.scss";
+
 @import "./main.scss";
 @import "./partial/header.scss";
 @import "./partial/footer.scss";
@@ -9,3 +11,4 @@
 
 @import "./pages/home.scss";
 @import "./pages/videoDetail.scss";
+@import "./pages/userProfile.scss";

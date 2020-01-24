@@ -11,7 +11,11 @@ const commentSchema = new mongoose.Schema({
   },
   video: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "video" // objectID가 어디로 부터 온것인지 ref를 통해 설정
+    ref: "Video" // objectID가 어디로 부터 온것인지 ref를 통해 설정
+  },
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
   }
 });
 const commentModel = mongoose.model("Comment", commentSchema);

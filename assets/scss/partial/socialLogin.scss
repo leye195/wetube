@@ -12,16 +12,23 @@
       color: $white;
     }
   }
-  .social-login--github {
-    background-color: $black;
+  .social-login--naver,
+  .social-login--github,
+  .social-login--kakao {
     color: $white;
-  }
-  .social-login--google {
-    background-color: $orange;
-
+    font-weight: 600;
     i {
       padding: 5px;
     }
+  }
+  .social-login--github {
+    background-color: $black;
+  }
+  .social-login--naver {
+    background-color: $green;
+  }
+  .social-login--kakao {
+    background-color: $kakao;
   }
   span {
     font-size: 20px;
