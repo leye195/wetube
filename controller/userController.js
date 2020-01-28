@@ -1,6 +1,7 @@
 import routes from "../routes";
 import passport from "passport";
 import User from "../models/user";
+
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
 };
@@ -21,6 +22,7 @@ export const postJoin = async (req, res, next) => {
   }
 };
 
+//local 로그인
 export const getLogin = (req, res) => {
   res.render("login", { pageTitle: "Login" });
 };
@@ -28,7 +30,7 @@ export const postLogin = passport.authenticate("local", {
   successRedirect: routes.home,
   failureRedirect: routes.login
 });
-
+//github login
 export const githubLogin = passport.authenticate("github");
 export const githubLoginCallback = async (
   accessToken,
@@ -36,7 +38,6 @@ export const githubLoginCallback = async (
   profile,
   cb
 ) => {
-  //console.log(profile, cb);
   const {
     _json: { id, avatar_url: avatarUrl, name, email }
   } = profile;
@@ -61,7 +62,7 @@ export const githubLoginCallback = async (
 export const postGithubLogin = (req, res) => {
   res.redirect(routes.home);
 };
-
+//naver login
 export const naverLogin = passport.authenticate("naver");
 export const naverLoginCallback = async (
   accessToken,
@@ -92,12 +93,11 @@ export const naverLoginCallback = async (
   } catch (error) {
     return done(error);
   }
-  //return done(null, _json);
 };
 export const postNaverLogin = (req, res) => {
   res.redirect(routes.home);
 };
-
+//kakao login
 export const kakaoLogin = passport.authenticate("kakao");
 export const kakaoLoginCallback = async (
   accessToken,
@@ -142,6 +142,8 @@ export const logout = (req, res) => {
 export const users = (req, res) => {
   res.render("users", { pageTitle: "Users" });
 };
+
+//edit user
 export const getEditProfile = (req, res) => {
   res.render("editProfile", { pageTitle: "Edit User" });
 };
@@ -161,6 +163,7 @@ export const postEditProfile = async (req, res) => {
   }
 };
 
+//change password
 export const getChangePassword = (req, res) => {
   res.render("changePassword", { pageTitle: "Change Password" });
 };
@@ -182,15 +185,19 @@ export const postChangePassword = async (req, res) => {
     res.redirect(`/users${routes.changePassword}`);
   }
 };
+
 export const getMe = (req, res) => {
   res.render("userDetail", { pageTitle: "Me | User Detail", user: req.user });
 };
+
 export const userDetail = async (req, res) => {
   const {
     params: { id }
   } = req;
   try {
-    const user = await User.findOne({ _id: id });
+    //populate()를 이용해 다른 document의 ObjectId를 실제 객체로 치환
+    const user = await User.findOne({ _id: id }).populate("videos");
+    console.log(user);
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     console.log(error);

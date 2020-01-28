@@ -1,18 +1,27 @@
 extends ./layouts/main.pug
+include partial/mixins/videoPlayer
+
 block content
     .video-detail__container
-        .video__player
-            video(src=`/${video.fileUrl}`,controls=true)
+        +videoPlayer({
+            src:`/${video.fileUrl}`
+        })
         .video__info
             if loggedUser
                 if loggedUser.id === video.creator.id 
                     a(href=routes.editVideo(video._id)) 
                         button Edit Video
             h1.video__title=video.title
-            if video.view===1
-                p.video__view=`1 view`
-            else
-                p.video__view=`${video.view} views`
+            .video__prim
+                if video.view===1
+                    span.video__view=`1 view`
+                else
+                    span.video__view=`${video.view} views`
+                div.video__menu
+                    button.video__up
+                        i.far.fa-thumbs-up
+                    button.video__down
+                        i.far.fa-thumbs-down
             p.video__description=video.description
         .video__author
             | Uploaded By 

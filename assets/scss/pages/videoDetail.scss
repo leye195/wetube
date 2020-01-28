@@ -28,11 +28,20 @@
       margin-bottom: 10px;
       padding-bottom: 10px;
     }
-    .video__view {
-      color: $dark-grey;
+    .video__prim {
+      position: relative;
       border-bottom: 1px solid $dark-grey;
-      font-size: 14px;
+      display: flex;
+      .video__view {
+        color: $dark-grey;
+        font-size: 14px;
+      }
+      .video__menu {
+        position: absolute;
+        right: 0;
+      }
     }
+
     .video__description {
       color: $black;
       border-bottom: 1px solid $dark-grey;
