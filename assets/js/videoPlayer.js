@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const videoContainer = document.querySelector("#js__player"),
   videoPlayer = document.querySelector("#js__player video"),
   playBtn = document.querySelector(".videoPlayer__column .fa-play"),
@@ -10,7 +12,17 @@ const videoContainer = document.querySelector("#js__player"),
 let time_id = undefined,
   cur_volume = 0.5,
   vol_status = "fa-volume-down";
-//fa-pause
+
+const registerView = () => {
+  const vid = window.location.href.split("/videos/")[1]; //pathname.slice(5,).split("/")[0];
+  fetch(`api/${vid}/view`, {
+    method: "post"
+  });
+  /*axios.post(`/api/${id}/view`)
+  .then((response)=>{
+
+  })*/
+};
 const handlePlay = () => {
   //console.log(videoPlayer.currentTime);
   if (playBtn.classList.contains("fa-play")) {
@@ -96,6 +108,7 @@ const getCurrentTime = () => {
   currentTime.innerHTML = time;
 };
 const resetVideo = () => {
+  registerView();
   videoPlayer.currentTime = 0;
   playBtn.classList.remove("fa-pause");
   playBtn.classList.add("fa-play");
@@ -120,6 +133,7 @@ const handleDrag = e => {
     vol_status = "fa-volume-up";
   }
 };
+
 const handleMouseOver = e => {
   volumeRange.style.opacity = 1.0;
 };

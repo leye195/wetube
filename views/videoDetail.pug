@@ -1,5 +1,6 @@
 extends ./layouts/main.pug
 include partial/mixins/videoPlayer
+include partial/mixins/comment
 
 block content
     .video-detail__container
@@ -31,4 +32,14 @@ block content
                 span.video__comment-number 1 comment
             else    
                 span.video__comment-number #{video.comments.length} comments
-        
+            .form-container
+                    form.add__comment
+                        input.leavecomment(type="text",name="comment",placeholder="Add a comment")
+            .comments__container
+                each comment in video.comments.reverse()
+                    +comment(comment)
+
+                
+
+                
+                

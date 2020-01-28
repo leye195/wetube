@@ -1,0 +1,7 @@
+mixin comment(comment={})
+    .comment__body
+        .comment__author
+            img(src=comment.creator.avatarUrl)
+        .comment__main
+            p.comment__header=comment.creator.name
+            p.comment__content=comment.text

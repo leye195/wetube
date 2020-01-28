@@ -1,6 +1,9 @@
 extends ./layouts/main.pug
 block content
     .form-container
+        .video-container#record-container
+            video#video__preview
+            button#jsRecordBtn Start Recording
         form(action=routes.videos+routes.upload,method="post",enctype="multipart/form-data")
             .fileUpload
                 label(for="video-file") Video File

@@ -13,6 +13,7 @@ import dotenv from "dotenv";
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
+import apiRouter from "./routers/apiRouter";
 import routes from "./routes";
 import "./passport";
 import { localMiddleware } from "./middlewares";
@@ -43,5 +44,6 @@ app.use(localMiddleware);
 app.use(routes.home, globalRouter); // index 경로
 app.use(routes.users, userRouter); // user 경로에 userRouter 적용
 app.use(routes.videos, videoRouter); // video 경로에 videoRouter 적용
+app.use(routes.api, apiRouter);
 
 export default app;
