@@ -21,7 +21,9 @@ passport.use(
     {
       clientID: process.env.GB_CLIENTID,
       clientSecret: process.env.GB_CLIENTSECRET,
-      callbackURL: `http://localhost:8080${routes.githubCallback}`
+      callbackURL: process.env.PRODUCTION
+        ? `http://blooming-plains-95078.herokuapp.com${routes.githubCallback}`
+        : `http://localhost:8080${routes.githubCallback}`
     },
     githubLoginCallback
   )
@@ -32,7 +34,9 @@ passport.use(
     {
       clientID: process.env.N_CLIENTID,
       clientSecret: process.env.N_CLIENTSECRET,
-      callbackURL: `http://localhost:8080${routes.naverCallback}`
+      callbackURL: process.env.PRODUCTION
+        ? `http://blooming-plains-95078.herokuapp.com${routes.githubCallback}`
+        : `http://localhost:8080${routes.githubCallback}`
     },
     naverLoginCallback
   )
@@ -42,7 +46,9 @@ passport.use(
   new kakaoStrategy(
     {
       clientID: process.env.K_CLIENTID,
-      callbackURL: `http://localhost:8080${routes.kakaoCallback}`
+      callbackURL: process.env.PRODUCTION
+        ? `http://blooming-plains-95078.herokuapp.com${routes.githubCallback}`
+        : `http://localhost:8080${routes.githubCallback}`
     },
     kakaoLoginCallback
   )
