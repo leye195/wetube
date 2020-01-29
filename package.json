@@ -13,8 +13,7 @@
     "build": "npm run build:server && npm run build:assets && npm run copyAll",
     "prebuild": "rm -rf build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "PRODUCTION=true node build/init.js",
-    "prestart": "npm run build"
+    "start": "PRODUCTION=true node build/init.js"
   },
   "author": "YoungJae",
   "license": "ISC",
