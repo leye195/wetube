@@ -44,6 +44,16 @@
         .comment__content {
           padding: 10px 5px;
         }
+        .comment__reply {
+          position: absolute;
+          top: 0;
+          right: 30px;
+          color: $black;
+          cursor: pointer;
+          &:hover {
+            color: #191919;
+          }
+        }
         .comment__delete {
           position: absolute;
           top: 0;
@@ -51,6 +61,9 @@
           font-weight: 800;
           cursor: pointer;
           color: darkred;
+          &:hover {
+            color: $red;
+          }
         }
       }
     }

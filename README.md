@@ -1,6 +1,6 @@
 # WeTube
 
-YouTube Clone with VanillaJS & NodeJS
+YouTube Clone with VanillaJS & NodeJS(Express)
 
 ## Link:
 
@@ -19,10 +19,10 @@ YouTube Clone with VanillaJS & NodeJS
 - [x] Video Detail
 - [x] Edit Video
 
-## features:
+## Features:
 
-- register,login(local login, social login(github,kakao,naver)
+- register,login (passport.js(local,github,kakao,naver))
 - edit profile, change password
 - upload video, record video, edit video
-- post comment,delete comment
-- search video
+- post comment,delete comment, replay comment(진행 중)
+- search video,like/unlike video(진행 중)

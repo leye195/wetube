@@ -5,6 +5,11 @@ mixin comment(comment={})
         .comment__main
             p.comment__header=comment.creator.name
             p.comment__content=comment.text
-            if loggedUser && loggedUser.id===comment.creator.id
-                span.comment__delete x
+
+            if loggedUser 
+                span.comment__reply 
+                    i.fas.fa-reply
+                if loggedUser.id===comment.creator.id
+                    span.comment__delete 
+                        i.fas.fa-trash-alt
         
