@@ -1,6 +1,7 @@
 import routes from "../routes";
 import passport from "passport";
 import User from "../models/user";
+import userModel from "../models/user";
 
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
@@ -152,10 +153,11 @@ export const postEditProfile = async (req, res) => {
     body: { name, email },
     file
   } = req;
+  console.log(file);
   try {
     await User.findByIdAndUpdate(
       { _id: req.user.id },
-      { name, email, avatarUrl: file ? file.path : req.user.avatarUrl }
+      { name, email, avatarUrl: file ? file.location : req.user.avatarUrl }
     );
     res.redirect(routes.me);
   } catch (error) {
@@ -186,8 +188,9 @@ export const postChangePassword = async (req, res) => {
   }
 };
 
-export const getMe = (req, res) => {
-  res.render("userDetail", { pageTitle: "Me | User Detail", user: req.user });
+export const getMe = async (req, res) => {
+  const user = await userModel.findById(req.user._id).populate("videos");
+  res.render("userDetail", { pageTitle: "Me | User Detail", user });
 };
 
 export const userDetail = async (req, res) => {

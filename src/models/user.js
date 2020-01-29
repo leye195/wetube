@@ -3,7 +3,11 @@ import passportLocalMongoose from "passport-local-mongoose";
 const userSchema = new mongoose.Schema({
   name: String,
   email: String,
-  avatarUrl: String,
+  avatarUrl: {
+    type: String,
+    default:
+      "https://wetuberbucket.s3.ap-northeast-2.amazonaws.com/avatars/58c11a401956bab841de5f227c337c43"
+  },
   githubId: Number,
   naverId: Number,
   comments: [

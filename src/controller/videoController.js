@@ -35,12 +35,13 @@ export const getUpload = (req, res) => {
 export const postUpload = async (req, res) => {
   const {
     body: { title, description },
-    file: { path }
+    file: { location }
   } = req;
   // upload and save video,
   // 생성된 id를 이용해 videoDetail page로 이동
+
   const newVideo = await videoModel.create({
-    fileUrl: path,
+    fileUrl: location,
     title,
     description,
     creator: req.user.id
@@ -77,7 +78,7 @@ export const getEditVideo = async (req, res) => {
   const { id } = req.params;
   try {
     const video = await videoModel.findById(id);
-    if (video.creator !== req.user._id) {
+    if (String(video.creator) !== String(req.user.id)) {
       throw Error();
     } else {
       res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
@@ -104,10 +105,12 @@ export const deleteVideo = async (req, res) => {
   } = req;
   try {
     const video = await videoModel.findById(id);
-    if (video.creator !== req.user._id) {
+    if (String(video.creator) !== String(req.user._id)) {
       throw Error();
     } else {
       await videoModel.findOneAndDelete({ _id: id });
+      req.user.videos.splice(req.user.videos.indexOf(id), 1);
+      req.user.save();
       res.redirect(routes.home);
     }
   } catch (error) {
@@ -122,6 +125,7 @@ export const registerView = async (req, res) => {
       params: { id }
     } = req;
     const video = await videoModel.findById(id);
+    console.log(video);
     video.view += 1;
     video.save();
     res.status(200);
@@ -138,6 +142,7 @@ export const postComment = async (req, res) => {
       body: { comment },
       user
     } = req;
+    if (user === undefined) throw Error();
     const video = await videoModel.findById(id);
     const newComment = await commentModel.create({
       text: comment,
@@ -145,8 +150,23 @@ export const postComment = async (req, res) => {
     });
     video.comments.push(newComment.id);
     video.save();
-    //req.user.comments.push(newComment.id);
-    //req.user.save();
+    res.status(200);
+    res.json(user);
+  } catch (error) {
+    res.status(400);
+    res.end();
+  }
+};
+export const postDeleteComment = async (req, res) => {
+  try {
+    const {
+      params: { id, cid }
+    } = req;
+    await commentModel.findByIdAndDelete(cid);
+    const video = await videoModel.findById(id);
+    const idx = video.comments.indexOf(cid);
+    video.comments.splice(idx, 1);
+    video.save();
     res.status(200);
   } catch (error) {
     res.status(400);

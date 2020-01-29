@@ -14,3 +14,11 @@ YouTube Clone with VanillaJS & NodeJS
 - [x] Upload Video
 - [x] Video Detail
 - [x] Edit Video
+
+## features:
+
+- register,login(local login, social login(github,kakao,naver)
+- edit profile, change password
+- upload video, record video, edit video
+- post comment,delete comment
+- search video

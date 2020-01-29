@@ -5,7 +5,7 @@ include partial/mixins/comment
 block content
     .video-detail__container
         +videoPlayer({
-            src:`/${video.fileUrl}`
+            src:video.fileUrl
         })
         .video__info
             if loggedUser
@@ -34,7 +34,8 @@ block content
                 span.video__comment-number #{video.comments.length} comments
             .form-container
                     form.add__comment
-                        input.leavecomment(type="text",name="comment",placeholder="Add a comment")
+                        input.leavecomment(type="text",name="comment",placeholder="Add a comment",required)
+                        input(type="submit",value="Post Comment")
             .comments__container
                 each comment in video.comments.reverse()
                     +comment(comment)

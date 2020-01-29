@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import bodyParser from "body-parser";
 import express from "express";
 import morgan from "morgan";
@@ -22,6 +23,7 @@ const app = express();
 const cookieStore = mongoStore(expressSession);
 app.use(helmet()); // for security
 app.set("view engine", "pug"); // template engine setting
+app.set("views", path.join(__dirname, "views"));
 app.use("/upload", express.static(path.join(__dirname, "upload")));
 app.use("/static", express.static(path.join(__dirname, "static")));
 app.use(cookieParser()); // handle cookie

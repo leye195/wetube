@@ -1,4 +1,5 @@
 import axios from "axios";
+import getBlobDuration from "get-blob-duration";
 
 const videoContainer = document.querySelector("#js__player"),
   videoPlayer = document.querySelector("#js__player video"),
@@ -15,13 +16,9 @@ let time_id = undefined,
 
 const registerView = () => {
   const vid = window.location.href.split("/videos/")[1]; //pathname.slice(5,).split("/")[0];
-  fetch(`api/${vid}/view`, {
+  fetch(`/api/${vid}/view`, {
     method: "post"
   });
-  /*axios.post(`/api/${id}/view`)
-  .then((response)=>{
-
-  })*/
 };
 const handlePlay = () => {
   //console.log(videoPlayer.currentTime);
@@ -97,9 +94,11 @@ const formatTime = seconds => {
   }
   return `${hours}:${minutes}:${totalSeconds}`;
 };
-const setTotalTime = () => {
-  console.log(videoPlayer.duration);
-  const total = formatTime(videoPlayer.duration);
+const setTotalTime = async () => {
+  const blob = await fetch(videoPlayer.src).then(response => response.blob());
+  const duration = await getBlobDuration(blob);
+  //console.log(duration + " seconds");
+  const total = formatTime(duration);
   totalTime.innerHTML = total;
   time_id = setInterval(getCurrentTime, 1000);
 };
