@@ -9,6 +9,7 @@ export const getJoin = (req, res) => {
 export const postJoin = async (req, res, next) => {
   const { name, email, password1, password2 } = req.body;
   if (password1 !== password2) {
+    req.flash("error", "Password don't match");
     res.status(400);
     res.render("join", { pageTitle: "Join" });
   } else {
@@ -29,10 +30,15 @@ export const getLogin = (req, res) => {
 };
 export const postLogin = passport.authenticate("local", {
   successRedirect: routes.home,
-  failureRedirect: routes.login
+  failureRedirect: routes.login,
+  successFlash: `Login Success`,
+  failureFlash: "Login Failed Check your Email or Password"
 });
 //github login
-export const githubLogin = passport.authenticate("github");
+export const githubLogin = passport.authenticate("github", {
+  successFlash: "Login Success",
+  failureFlash: "Login Failed Check your Email or Password"
+});
 export const githubLoginCallback = async (
   accessToken,
   refreshToken,
@@ -64,7 +70,10 @@ export const postGithubLogin = (req, res) => {
   res.redirect(routes.home);
 };
 //naver login
-export const naverLogin = passport.authenticate("naver");
+export const naverLogin = passport.authenticate("naver", {
+  successFlash: "Login Success",
+  failureFlash: "Login Failed Check your Email or Password"
+});
 export const naverLoginCallback = async (
   accessToken,
   refreshToken,
@@ -99,7 +108,10 @@ export const postNaverLogin = (req, res) => {
   res.redirect(routes.home);
 };
 //kakao login
-export const kakaoLogin = passport.authenticate("kakao");
+export const kakaoLogin = passport.authenticate("kakao", {
+  successFlash: "Login Success",
+  failureFlash: "Login Failed Check your Email or Password"
+});
 export const kakaoLoginCallback = async (
   accessToken,
   refreshToken,
@@ -137,6 +149,7 @@ export const postkakaoLogin = (req, res) => {
 };
 
 export const logout = (req, res) => {
+  req.flash("info", "Logged Out, See you later");
   req.logout();
   res.redirect(routes.home);
 };
@@ -159,8 +172,10 @@ export const postEditProfile = async (req, res) => {
       { _id: req.user.id },
       { name, email, avatarUrl: file ? file.location : req.user.avatarUrl }
     );
+    req.flash("success", "Profile Updated");
     res.redirect(routes.me);
   } catch (error) {
+    req.flash("error", "Profile Update Failed");
     res.redirect(routes.editProfile);
   }
 };
@@ -178,11 +193,13 @@ export const postChangePassword = async (req, res) => {
       await req.user.changePassword(oldPassword, newPassword1);
       res.redirect(routes.me);
     } else {
+      req.flash("error", "Password don't match");
       res.status(400);
       res.redirect(`/users${routes.changePassword}`);
       return;
     }
   } catch (error) {
+    req.flash("error", "Can't change password");
     res.status(400);
     res.redirect(`/users${routes.changePassword}`);
   }
@@ -200,10 +217,11 @@ export const userDetail = async (req, res) => {
   try {
     //populate()를 이용해 다른 document의 ObjectId를 실제 객체로 치환
     const user = await User.findOne({ _id: id }).populate("videos");
-    console.log(user);
+    //console.log(user);
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
-    console.log(error);
+    //console.log(error);
+    req.flash("error", "User Not Found");
     res.redirect(routes.home);
   }
 };

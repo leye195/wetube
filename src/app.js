@@ -5,6 +5,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import flash from "express-flash";
 import path from "path";
 import passport from "passport";
 import expressSession from "express-session";
@@ -39,6 +40,7 @@ app.use(
     store: new cookieStore({ mongooseConnection: mongoose.connection }) //store을 mongo와 연결
   })
 );
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session()); //로그인 지속시키기 위해 session 사용
 app.use(localMiddleware);

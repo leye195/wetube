@@ -6,6 +6,7 @@ import userModel from "../models/user";
 export const home = async (req, res) => {
   try {
     const video = await videoModel.find({}).sort({ _id: -1 }); // -1을 준 이유는 descening
+    //req.flash("info", "Welcome Home");
     res.render("home", { pageTitle: "Home", videos: video });
   } catch (error) {
     res.render("home", { pageTitle: "Home", videos: [] });
