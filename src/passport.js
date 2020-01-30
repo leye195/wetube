@@ -22,7 +22,7 @@ passport.use(
       clientID: process.env.GB_CLIENTID,
       clientSecret: process.env.GB_CLIENTSECRET,
       callbackURL: process.env.PRODUCTION
-        ? `http://blooming-plains-95078.herokuapp.com${routes.githubCallback}`
+        ? `https://vvetube.herokuapp.com${routes.githubCallback}`
         : `http://localhost:8080${routes.githubCallback}`
     },
     githubLoginCallback
@@ -35,7 +35,7 @@ passport.use(
       clientID: process.env.N_CLIENTID,
       clientSecret: process.env.N_CLIENTSECRET,
       callbackURL: process.env.PRODUCTION
-        ? `http://blooming-plains-95078.herokuapp.com${routes.githubCallback}`
+        ? `https://vvetube.herokuapp.com${routes.githubCallback}`
         : `http://localhost:8080${routes.githubCallback}`
     },
     naverLoginCallback
@@ -47,7 +47,7 @@ passport.use(
     {
       clientID: process.env.K_CLIENTID,
       callbackURL: process.env.PRODUCTION
-        ? `http://blooming-plains-95078.herokuapp.com${routes.githubCallback}`
+        ? `https://vvetube.herokuapp.com${routes.githubCallback}`
         : `http://localhost:8080${routes.githubCallback}`
     },
     kakaoLoginCallback
