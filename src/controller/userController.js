@@ -232,7 +232,6 @@ export const userDetail = async (req, res) => {
 };
 export const postBanner = async (req, res) => {
   const { file, user } = req;
-  console.log(file);
   try {
     user.bannerUrl = file.location;
     user.save();
