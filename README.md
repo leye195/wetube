@@ -4,7 +4,7 @@ YouTube Clone with VanillaJS & NodeJS(Express)
 
 ## Link:
 
-- http://blooming-plains-95078.herokuapp.com/
+- http://vvetube.herokuapp.com/
 
 ## Pages:
 
