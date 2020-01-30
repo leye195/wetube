@@ -226,7 +226,6 @@ export const userDetail = async (req, res) => {
     console.log(user);
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
-    //console.log(error);
     req.flash("error", "User Not Found");
     res.redirect(routes.home);
   }
