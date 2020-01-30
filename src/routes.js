@@ -34,8 +34,12 @@ const KAKAO_CALLBACK = "/auth/kakao/callback";
 //API
 const API = "/api";
 const REGISTER_VIEW = "/:id/view"; //video view
+const LIKE = "/:id/like";
+const UNLIKE = "/:id/unlike";
 const ADD_COMMENT = "/:id/comment"; //add comment
 const DELETE_COMMENT = "/:id/comment/:cid"; //delete comment
+const BANNER = "/banner";
+
 const routes = {
   home: HOME,
   join: JOIN,
@@ -73,6 +77,9 @@ const routes = {
   api: API,
   registerView: REGISTER_VIEW,
   addComment: ADD_COMMENT,
-  deleteComment: DELETE_COMMENT
+  deleteComment: DELETE_COMMENT,
+  like: LIKE,
+  unlike: UNLIKE,
+  banner: BANNER
 };
 export default routes;

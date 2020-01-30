@@ -22,15 +22,21 @@ const uploadImage = multer({
     bucket: "wetuberbucket/avatars"
   })
 }); //multer({ dest: "upload/avatars/" });
+const uploadBanner = multer({
+  storage: multerS3({
+    s3,
+    acl: "public-read",
+    bucket: "wetuberbucket/banners"
+  })
+});
 export const uploadVideoMiddleware = uploadVideo.single("videofile");
 export const uploadImageMiddleware = uploadImage.single("avatar");
-
+export const uploadBannerMiddleware = uploadBanner.single("banner");
 export const localMiddleware = (req, res, next) => {
   //locals에 있는 것들은 템플릿에서 변수명 처럼 존재함
   res.locals.siteName = "Wetube";
   res.locals.routes = routes;
   res.locals.loggedUser = req.user || undefined; //passport에서 user를 로그인 시킬때 user object를 req.user에 저장해둠
-  //console.log(req.user);
   next();
 };
 export const onlyPublic = (req, res, next) => {

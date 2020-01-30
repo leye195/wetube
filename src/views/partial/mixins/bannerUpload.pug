@@ -1,0 +1,12 @@
+mixin bannerUpload()
+    .banner-upload__container
+        h3.banner-upload__h3 Banner Upload
+        span.banner-upload__exit x
+        .banner-upload__main
+            .banner-upload__zone
+                p Please Select your Banner
+                form(action=`/api${routes.banner}`,method="post",enctype="multipart/form-data")
+                    label(for="banner__upload") Upload
+                    input.banner-upload__upload(id="banner__upload",type="file",name="banner",accept="image/*")
+                    .banner-upload__footer
+                        input.banner-upload__confirm(type="submit",value="Confirm")

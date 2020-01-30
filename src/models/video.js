@@ -14,6 +14,18 @@ const videoSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  like: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    }
+  ],
+  unlike: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    }
+  ],
   createdAt: {
     type: Date,
     default: Date.now

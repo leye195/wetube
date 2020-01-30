@@ -5,8 +5,10 @@ import userModel from "../models/user";
 
 export const home = async (req, res) => {
   try {
-    const video = await videoModel.find({}).sort({ _id: -1 }); // -1을 준 이유는 descening
-    //req.flash("info", "Welcome Home");
+    const video = await videoModel
+      .find({})
+      .populate("creator")
+      .sort({ _id: -1 }); // -1을 준 이유는 descening
     res.render("home", { pageTitle: "Home", videos: video });
   } catch (error) {
     res.render("home", { pageTitle: "Home", videos: [] });
@@ -20,7 +22,9 @@ export const search = async (req, res) => {
       .find({
         title: { $regex: term, $options: "i" }
       })
+      .populate("creator")
       .sort({ _id: -1 });
+    console.log(video);
   } catch (error) {
     console.log(error);
   }
@@ -163,6 +167,7 @@ export const postDeleteComment = async (req, res) => {
     const {
       params: { id, cid }
     } = req;
+    console.log();
     await commentModel.findByIdAndDelete(cid);
     const video = await videoModel.findById(id);
     const idx = video.comments.indexOf(cid);
@@ -173,5 +178,43 @@ export const postDeleteComment = async (req, res) => {
     res.status(400);
   } finally {
     res.end();
+  }
+};
+export const postLikeVideo = async (req, res) => {
+  try {
+    const {
+      params: { id }
+    } = req;
+    const video = await videoModel.findById(id);
+    if (video.like.indexOf(req.user.id) === -1) {
+      console.log(video.like);
+      console.log(video.like.indexOf(req.user.id));
+      if (video.unlike.indexOf(req.user.id) !== -1) {
+        video.unlike.splice(video.unlike.indexOf(req.user.id), 1);
+      }
+      video.like.push(req.user.id);
+      video.save();
+    }
+    res.status(200).json({ like: video.like, unlike: video.unlike });
+  } catch (error) {
+    res.status(400).end();
+  }
+};
+export const postUnlikeVideo = async (req, res) => {
+  try {
+    const {
+      params: { id }
+    } = req;
+    const video = await videoModel.findById(id);
+    if (video.unlike.indexOf(req.user.id) === -1) {
+      if (video.like.indexOf(req.user.id) !== -1) {
+        video.like.splice(video.like.indexOf(req.user.id, 1));
+      }
+      video.unlike.push(req.user.id);
+      video.save();
+    }
+    res.status(200).json({ unlike: video.unlike, like: video.like });
+  } catch (error) {
+    res.status(400).end();
   }
 };

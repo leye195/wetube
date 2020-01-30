@@ -22,5 +22,14 @@
   }
   .user-profile__videos {
     margin: 20px;
+    .upload__label {
+      margin: 10px 0;
+    }
+  }
+  .wvideo {
+    padding-bottom: 10px;
+    &:not(:last-child) {
+      border-bottom: 1px solid $dark-grey;
+    }
   }
 }

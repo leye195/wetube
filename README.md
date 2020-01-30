@@ -21,8 +21,8 @@ YouTube Clone with VanillaJS & NodeJS(Express)
 
 ## Features:
 
-- register,login (passport.js(local,github,kakao,naver))
-- edit profile, change password
+- register, login -- passport.js(local,github,kakao,naver)
+- edit profile, change password, change banner image
 - upload video, record video, edit video
-- post comment,delete comment, replay comment(진행 중)
-- search video,like/unlike video(진행 중)
+- post comment, delete comment, replay comment(진행 중)
+- search video, like/unlike video

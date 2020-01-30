@@ -32,6 +32,16 @@
       position: relative;
       border-bottom: 1px solid $dark-grey;
       display: flex;
+      .video__author {
+        a,
+        span {
+          margin-right: 5px;
+          color: $dark-grey;
+        }
+        a:hover {
+          color: $black;
+        }
+      }
       .video__view {
         color: $dark-grey;
         font-size: 14px;
@@ -39,6 +49,14 @@
       .video__menu {
         position: absolute;
         right: 0;
+        .video__up:hover,
+        .video__down:hover {
+          background-color: #cecece;
+        }
+        .fa-thumbs-up,
+        .fa-thumbs-down {
+          margin-left: 10px;
+        }
       }
     }
 
@@ -51,10 +69,5 @@
   .video__author,
   .video__comment {
     margin-top: 10px;
-  }
-  .video__author {
-    a {
-      color: $black;
-    }
   }
 }

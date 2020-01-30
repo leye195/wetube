@@ -2,7 +2,7 @@ import axios from "axios";
 const commentsContainer = document.querySelector(".comments__container");
 const addForm = document.querySelector(".add__comment");
 const commentNumber = document.querySelector(".video__comment-number");
-const deleteBtn = document.querySelectorAll(".comment__delete");
+const deleteBtn = document.querySelectorAll(".comment__delete i");
 const handleSubmit = e => {
   e.preventDefault();
   const input = document.querySelector(".leavecomment");
@@ -12,7 +12,6 @@ const handleSubmit = e => {
 };
 const sendComment = async comment => {
   const vid = document.location.href.split("/videos/")[1];
-  //axios.post(`api/${vid}/comment`,{comment});
   const response = await axios({
     url: `/api/${vid}/comment`,
     method: "POST",
@@ -20,7 +19,7 @@ const sendComment = async comment => {
       comment
     }
   });
-  console.log(response);
+  //console.log(response);
   if (response.status === 200) {
     const { name, avatarUrl } = response.data;
     addCommentTag(comment, name, avatarUrl);
@@ -69,7 +68,7 @@ const increaseNumber = () => {
 };
 const handleDelete = e => {
   const { target } = e;
-  const body = target.parentNode.parentNode;
+  const body = target.parentNode.parentNode.parentNode;
   deleteComment(body);
 };
 const deleteComment = async body => {

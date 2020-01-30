@@ -14,19 +14,21 @@ block content
                         button Edit Video
             h1.video__title=video.title
             .video__prim
+                .video__author
+                    a(href=routes.userDetail(video.creator._id))=video.creator.name
+                    span • 
                 if video.view===1
-                    span.video__view=`1 view`
+                    span.video__view=` 1 view`
                 else
-                    span.video__view=`${video.view} views`
+                    span.video__view=` ${video.view} views`
                 div.video__menu
                     button.video__up
+                        span.like__count=video.like.length
                         i.far.fa-thumbs-up
                     button.video__down
+                        span.unlike__count=video.unlike.length
                         i.far.fa-thumbs-down
             p.video__description=video.description
-        .video__author
-            | Uploaded By 
-            a(href=routes.userDetail(video.creator._id))=video.creator.name
         .video__comment
             if video.comments.length===1
                 span.video__comment-number 1 comment

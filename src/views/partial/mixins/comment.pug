@@ -5,7 +5,6 @@ mixin comment(comment={})
         .comment__main
             p.comment__header=comment.creator.name
             p.comment__content=comment.text
-
             if loggedUser 
                 span.comment__reply 
                     i.fas.fa-reply

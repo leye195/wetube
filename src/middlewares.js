@@ -23,8 +23,16 @@ const uploadImage = multer({
     bucket: "wetuberbucket/avatars"
   })
 }); //multer({ dest: "upload/avatars/" });
+const uploadBanner = multer({
+  storage: multerS3({
+    s3,
+    acl: "public-read",
+    bucket: "wetuberbucket/banners"
+  })
+});
 export const uploadVideoMiddleware = uploadVideo.single("videofile");
 export const uploadImageMiddleware = uploadImage.single("avatar");
+export const uploadBannerMiddleware = uploadBanner.single("banner");
 
 export const localMiddleware = (req, res, next) => {
   //locals에 있는 것들은 템플릿에서 변수명 처럼 존재함

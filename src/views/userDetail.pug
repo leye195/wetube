@@ -1,7 +1,12 @@
 extends ./layouts/main.pug
 include partial/mixins/videoBlock
+include partial/mixins/bannerUpload
 block content
     .user-profile
+        div.user-profile__banner
+            img.u-banner(src=user.bannerUrl)
+            if loggedUser && user.id===loggedUser.id
+                button.banner__btn.btn__hide Add Banner 
         .user-profile__header
             img.u-avatar(src=user.avatarUrl)
             h4.profile__username=user.name
@@ -11,10 +16,13 @@ block content
                     button Edit Profile
                 a(href=`/users${routes.changePassword}`)
                     button Change Password
-        .user-profile__videos
-            .videos
+        .user-profile__videos.wvideo
+            if user.videos.length>0
+                p.upload__label Uploaded Video
+            .videos       
                 each video in user.videos
                     +videoBlock(video)
+        +bannerUpload()
 
 
 

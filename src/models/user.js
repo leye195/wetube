@@ -21,7 +21,10 @@ const userSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "Video"
     }
-  ]
+  ],
+  bannerUrl: {
+    type: String
+  }
 });
 userSchema.plugin(passportLocalMongoose, { usernameField: "email" }); //plugin 추가
 //usernameField: 어떤 field를 username으로 설정할지 셋팅

@@ -9,7 +9,9 @@ const videoContainer = document.querySelector("#js__player"),
   currentTime = document.querySelector("#currentTime"),
   totalTime = document.querySelector("#totalTime"),
   volumeContainer = document.querySelector(".videoPlayer__volume"),
-  volumeRange = document.querySelector("#videoPlayer__volume");
+  volumeRange = document.querySelector("#videoPlayer__volume"),
+  videoLike = document.querySelector(".video__up"),
+  videoUnLike = document.querySelector(".video__down");
 let time_id = undefined,
   cur_volume = 0.5,
   vol_status = "fa-volume-down";
@@ -139,6 +141,34 @@ const handleMouseOver = e => {
 const handleMouseLeave = e => {
   volumeRange.style.opacity = 0.0;
 };
+const handleLike = async e => {
+  const id = window.location.href.split("/videos/")[1];
+  const response = await axios({
+    url: `/api/${id}/like`,
+    method: "POST"
+  });
+  if (response.status === 200) {
+    const {
+      data: { like, unlike }
+    } = response;
+    document.querySelector(".like__count").innerHTML = like.length;
+    document.querySelector(".unlike__count").innerHTML = unlike.length;
+  }
+};
+const handleUnlike = async e => {
+  const id = window.location.href.split("/videos/")[1];
+  const response = await axios({
+    url: `/api/${id}/unlike`,
+    method: "POST"
+  });
+  if (response.status === 200) {
+    const {
+      data: { unlike, like }
+    } = response;
+    document.querySelector(".like__count").innerHTML = like.length;
+    document.querySelector(".unlike__count").innerHTML = unlike.length;
+  }
+};
 const init = () => {
   videoPlayer.volume = cur_volume;
   playBtn.addEventListener("click", handlePlay);
@@ -149,6 +179,8 @@ const init = () => {
   volumeRange.addEventListener("input", handleDrag);
   volumeContainer.addEventListener("mouseover", handleMouseOver);
   volumeContainer.addEventListener("mouseleave", handleMouseLeave);
+  videoLike.addEventListener("click", handleLike);
+  videoUnLike.addEventListener("click", handleUnlike);
 };
 
 if (videoContainer) {

@@ -216,12 +216,29 @@ export const userDetail = async (req, res) => {
   } = req;
   try {
     //populate()를 이용해 다른 document의 ObjectId를 실제 객체로 치환
-    const user = await User.findOne({ _id: id }).populate("videos");
-    //console.log(user);
+    const user = await User.findOne({ _id: id }).populate({
+      path: "videos",
+      populate: {
+        path: "creator",
+        model: userModel //nested
+      }
+    });
+    console.log(user);
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     //console.log(error);
     req.flash("error", "User Not Found");
     res.redirect(routes.home);
+  }
+};
+export const postBanner = async (req, res) => {
+  const { file, user } = req;
+  console.log(file);
+  try {
+    user.bannerUrl = file.location;
+    user.save();
+    res.status(200).redirect(routes.me);
+  } catch (error) {
+    res.status(400).redirect(routes.me);
   }
 };

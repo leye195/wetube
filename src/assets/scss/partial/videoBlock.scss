@@ -12,7 +12,23 @@
     font-weight: 500;
     color: $black;
   }
-  .videoBlock__views {
-    color: $dark-grey;
+  .video__view_creator {
+    .videoBlock__views,
+    .videoBlock__creator {
+      color: $dark-grey;
+    }
+    .videoBlock__creator {
+      margin-bottom: 5px;
+      &:hover {
+        color: $black;
+      }
+    }
+    span,
+    a {
+      color: $dark-grey;
+    }
+    a {
+      display: inline;
+    }
   }
 }
