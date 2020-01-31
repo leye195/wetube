@@ -1,12 +1,14 @@
 import axios from "axios";
-const user_id = document.querySelector(".video__author a"),
-  subscribe_btn = document.querySelector(".sbtn");
+let user_id = document.querySelector(".video__author a");
+const subscribe_btn = document.querySelector(".sbtn");
 const handleSubscribe = async e => {
   let uid = "";
   if (user_id !== null) {
     uid = user_id.href.split("/users/")[1];
   } else {
-    uid = window.location.href.split("/users/")[1];
+    user_id = document.querySelector(".channelBlock a");
+    if (user_id === null) uid = window.location.href.split("/users/")[1];
+    else uid = user_id.id;
   }
   const response = await axios({
     url: `/api/${uid}/subscribe`,

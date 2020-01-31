@@ -5,3 +5,5 @@ import "./addComment";
 import "./addBanner";
 import "./addContent";
 import "./subscribe";
+import "./userHeader";
+import "./info";

@@ -22,6 +22,9 @@ import { localMiddleware } from "./middlewares";
 dotenv.config();
 const app = express();
 const cookieStore = mongoStore(expressSession);
+app.use(
+  cors({ origin: "https://wetuberbucket.s3.ap-northeast-2.amazonaws.com/" })
+); // cross-domain
 app.use(helmet()); // for security
 app.set("view engine", "pug"); // template engine setting
 app.set("views", path.join(__dirname, "views"));
@@ -30,7 +33,6 @@ app.use("/static", express.static(path.join(__dirname, "static")));
 app.use(cookieParser()); // handle cookie
 app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
-app.use(cors()); // cross-domain
 app.use(morgan("dev")); // common,tiny,dev
 app.use(
   expressSession({

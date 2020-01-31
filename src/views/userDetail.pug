@@ -1,6 +1,8 @@
 extends ./layouts/main.pug
 include partial/mixins/videoBlock
 include partial/mixins/bannerUpload
+include partial/mixins/channelBlock
+
 block content
     .user-profile
         +bannerUpload()
@@ -23,39 +25,78 @@ block content
                 a(href=`/users${routes.changePassword}`)
                     button Change Password
         ul.user-content__container
-            li.li-home Home
+            li.li-home.cur Home
             li.li-video Video
             li.li-channel Channel
             li.li-info Information
-        .user-profile__videos.wvideo
-            p.upload__label Uploaded Videos
-            .videos       
-                each video in user.videos
-                    +videoBlock(video)
-        .user-profile__videos.wvideo
-            p.liked__label Liked Videos
-            .videos
-                each video in user.likes
-                    +videoBlock(video)
-        if loggedUser && user.id===loggedUser.id
+        div(class="home__section",style={"width":"100%"})
             .user-profile__videos.wvideo
-                .user-profile__section
-                    .user-profile__sectionbtn
-                        button Add Section
-                    .user-profile__form
-                        form
-                            label
-                                span.label__span Contents
-                                select
-                                    option(selected) Contents Select
-                                    optgroup(label="Video")
-                                        option(value="Popular") Popular upload
-                                    optgroup(label="Channel")
-                                        option(value="Subscribed") Subscribed
-                            div.formbtn__container
-                                input(type="submit",value="Confirm")
-                                button Cancel
-
+                p.upload__label Uploaded Videos
+                .videos       
+                    each video in user.videos
+                        +videoBlock(video)
+            .user-profile__videos.wvideo
+                p.liked__label Liked Videos
+                .videos
+                    each video in user.likes
+                        +videoBlock(video)
+            if loggedUser && user.id===loggedUser.id
+                .user-profile__videos.wvideo
+                    .user-profile__section
+                        .user-profile__sectionbtn
+                            button Add Section
+                        .user-profile__form
+                            form
+                                label
+                                    span.label__span Contents
+                                    select
+                                        option(selected) Contents Select
+                                        optgroup(label="Video")
+                                            option(value="Popular") Popular upload
+                                        optgroup(label="Channel")
+                                            option(value="Subscribed") Subscribed
+                                div.formbtn__container
+                                    input(type="submit",value="Confirm")
+                                    button Cancel
+        .video__section
+            if user.videos.length>0
+                .videos       
+                    each video in user.videos
+                        +videoBlock(video)
+            else
+                .video__empty Video Empty
+        div.channel__section
+            if user.subscribe.length>0
+                .channels
+                    each channel in user.subscribe
+                        +channelBlock(channel)
+            else
+                p Channel Empty
+        div.info__section
+            .infoBlock
+                .info.info__description
+                    p Description
+                    if loggedUser.id===user.id
+                        .form-container
+                            form
+                                textarea(name="description", cols="30", rows="8")
+                                .info__btn
+                                    input(type="submit",value="Confirm")
+                                    button.description__cancel Cancel
+                    else
+                        .description__container
+                            p Empty
+                .info.info__link
+                    p Link
+                    if loggedUser.id===user.id
+                        .link__form
+                            form
+                        button.add__link 
+                            i.fas.fa-plus-circle  Add
+                        button.cancel__link Cancel
+                    else
+                        .link__container
+                            p No Link
 
 
 

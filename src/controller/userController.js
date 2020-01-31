@@ -225,6 +225,10 @@ export const getMe = async (req, res) => {
         path: "creator",
         model: userModel
       }
+    })
+    .populate({
+      path: "subscribe",
+      model: userModel
     });
   res.render("userDetail", { pageTitle: "Me | User Detail", user });
 };
@@ -249,6 +253,10 @@ export const userDetail = async (req, res) => {
           path: "creator",
           model: userModel
         }
+      })
+      .populate({
+        path: "subscribe",
+        model: userModel
       });
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
