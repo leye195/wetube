@@ -183,17 +183,20 @@ export const postDeleteComment = async (req, res) => {
 export const postLikeVideo = async (req, res) => {
   try {
     const {
-      params: { id }
+      params: { id },
+      user
     } = req;
     const video = await videoModel.findById(id);
     if (video.like.indexOf(req.user.id) === -1) {
-      console.log(video.like);
-      console.log(video.like.indexOf(req.user.id));
       if (video.unlike.indexOf(req.user.id) !== -1) {
         video.unlike.splice(video.unlike.indexOf(req.user.id), 1);
+        user.unlikes.splice(user.unlikes.indexOf(video._id), 1);
       }
       video.like.push(req.user.id);
+      user.likes.push(video._id);
       video.save();
+      user.save();
+      req.flash("info", "Added to like list");
     }
     res.status(200).json({ like: video.like, unlike: video.unlike });
   } catch (error) {
@@ -203,15 +206,20 @@ export const postLikeVideo = async (req, res) => {
 export const postUnlikeVideo = async (req, res) => {
   try {
     const {
-      params: { id }
+      params: { id },
+      user
     } = req;
     const video = await videoModel.findById(id);
     if (video.unlike.indexOf(req.user.id) === -1) {
       if (video.like.indexOf(req.user.id) !== -1) {
         video.like.splice(video.like.indexOf(req.user.id, 1));
+        user.likes.splice(user.likes.indexOf(video._id), 1);
       }
       video.unlike.push(req.user.id);
+      user.unlikes.push(video._id);
       video.save();
+      user.save();
+      req.flash("info", "unlike the video");
     }
     res.status(200).json({ unlike: video.unlike, like: video.like });
   } catch (error) {

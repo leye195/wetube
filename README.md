@@ -26,3 +26,4 @@ YouTube Clone with VanillaJS & NodeJS(Express)
 - upload video, record video, edit video
 - post comment, delete comment, replay comment(진행 중)
 - search video, like/unlike video
+- subscribe(진행 중)

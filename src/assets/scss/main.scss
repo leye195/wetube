@@ -56,3 +56,18 @@ button {
   background-color: $white;
   margin: 0;
 }
+.subscribe,
+.subscribed {
+  width: 100px;
+  font-weight: 500;
+  letter-spacing: 0.007px;
+}
+.subscribe {
+  background-color: $red;
+  color: $white;
+}
+.subscribed {
+  background-color: $light-grey;
+  color: #666666;
+  border: 1px solid #cececeee;
+}

@@ -1,0 +1,13 @@
+.user-content__container {
+  display: flex;
+  width: 100%;
+  border-bottom: 10px solid #e3e3e3;
+  li {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: $black;
+    &.li-home {
+      border-bottom: 1px solid red;
+    }
+  }
+}

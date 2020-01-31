@@ -25,6 +25,7 @@
 }
 .banner-upload__container {
   display: none;
+  z-index: 9;
   position: fixed;
   width: 600px;
   height: 400px;

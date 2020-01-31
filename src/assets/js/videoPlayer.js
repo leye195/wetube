@@ -153,6 +153,7 @@ const handleLike = async e => {
     } = response;
     document.querySelector(".like__count").innerHTML = like.length;
     document.querySelector(".unlike__count").innerHTML = unlike.length;
+    window.location.reload();
   }
 };
 const handleUnlike = async e => {
@@ -167,6 +168,7 @@ const handleUnlike = async e => {
     } = response;
     document.querySelector(".like__count").innerHTML = like.length;
     document.querySelector(".unlike__count").innerHTML = unlike.length;
+    window.location.reload();
   }
 };
 const init = () => {

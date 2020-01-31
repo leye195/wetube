@@ -33,11 +33,13 @@ const handleLeave = e => {
 };
 const init = () => {
   bannerContainer.style.display = "none";
-  userProfileBanner.addEventListener("mouseenter", handleOver);
-  userProfileBanner.addEventListener("mouseleave", handleLeave);
-  addBannerBtn.addEventListener("click", handleBannerBtn);
-  bannerExit.addEventListener("click", handleExit);
-  upload.addEventListener("change", handleUpload);
+  if (addBannerBtn) {
+    userProfileBanner.addEventListener("mouseenter", handleOver);
+    userProfileBanner.addEventListener("mouseleave", handleLeave);
+    addBannerBtn.addEventListener("click", handleBannerBtn);
+    bannerExit.addEventListener("click", handleExit);
+    upload.addEventListener("change", handleUpload);
+  }
 };
 if (userProfileBanner) {
   init();

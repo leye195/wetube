@@ -22,6 +22,11 @@ block content
                 else
                     span.video__view=` ${video.view} views`
                 div.video__menu
+                    if loggedUser.id !== video.creator.id 
+                        if loggedUser.subscribe.indexOf(video.creator._id)===-1
+                            button.sbtn.subscribe Subscribe
+                        else
+                            button.sbtn.subscribed Subscribed
                     button.video__up
                         span.like__count=video.like.length
                         i.far.fa-thumbs-up

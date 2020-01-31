@@ -39,6 +39,7 @@ const UNLIKE = "/:id/unlike";
 const ADD_COMMENT = "/:id/comment"; //add comment
 const DELETE_COMMENT = "/:id/comment/:cid"; //delete comment
 const BANNER = "/banner";
+const SUBSCRIBE = "/:id/subscribe";
 
 const routes = {
   home: HOME,
@@ -80,6 +81,7 @@ const routes = {
   deleteComment: DELETE_COMMENT,
   like: LIKE,
   unlike: UNLIKE,
-  banner: BANNER
+  banner: BANNER,
+  subscribe: SUBSCRIBE
 };
 export default routes;

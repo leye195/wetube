@@ -3,6 +3,7 @@ import passport from "passport";
 import User from "../models/user";
 import userModel from "../models/user";
 
+//Join
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
 };
@@ -34,6 +35,7 @@ export const postLogin = passport.authenticate("local", {
   successFlash: `Login Success`,
   failureFlash: "Login Failed Check your Email or Password"
 });
+
 //github login
 export const githubLogin = passport.authenticate("github", {
   successFlash: "Login Success",
@@ -69,6 +71,7 @@ export const githubLoginCallback = async (
 export const postGithubLogin = (req, res) => {
   res.redirect(routes.home);
 };
+
 //naver login
 export const naverLogin = passport.authenticate("naver", {
   successFlash: "Login Success",
@@ -107,6 +110,7 @@ export const naverLoginCallback = async (
 export const postNaverLogin = (req, res) => {
   res.redirect(routes.home);
 };
+
 //kakao login
 export const kakaoLogin = passport.authenticate("kakao", {
   successFlash: "Login Success",
@@ -206,7 +210,22 @@ export const postChangePassword = async (req, res) => {
 };
 
 export const getMe = async (req, res) => {
-  const user = await userModel.findById(req.user._id).populate("videos");
+  const user = await userModel
+    .findById(req.user._id)
+    .populate({
+      path: "videos",
+      populate: {
+        path: "creator",
+        model: userModel //nested
+      }
+    })
+    .populate({
+      path: "likes",
+      populate: {
+        path: "creator",
+        model: userModel
+      }
+    });
   res.render("userDetail", { pageTitle: "Me | User Detail", user });
 };
 
@@ -216,20 +235,29 @@ export const userDetail = async (req, res) => {
   } = req;
   try {
     //populate()를 이용해 다른 document의 ObjectId를 실제 객체로 치환
-    const user = await User.findOne({ _id: id }).populate({
-      path: "videos",
-      populate: {
-        path: "creator",
-        model: userModel //nested
-      }
-    });
-    console.log(user);
+    const user = await User.findOne({ _id: id })
+      .populate({
+        path: "videos",
+        populate: {
+          path: "creator",
+          model: userModel //nested
+        }
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "creator",
+          model: userModel
+        }
+      });
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     req.flash("error", "User Not Found");
     res.redirect(routes.home);
   }
 };
+
+//Banner Image upload
 export const postBanner = async (req, res) => {
   const { file, user } = req;
   try {
@@ -238,5 +266,33 @@ export const postBanner = async (req, res) => {
     res.status(200).redirect(routes.me);
   } catch (error) {
     res.status(400).redirect(routes.me);
+  }
+};
+
+//Subscribe User
+export const postSubscribe = async (req, res) => {
+  const {
+    body: { uid }
+  } = req;
+  try {
+    const user = await userModel.findOne({ _id: uid });
+    if (req.user.subscribe.indexOf(user._id) === -1) {
+      //console.log(1);
+      user.subscribed.push(req.user._id);
+      req.user.subscribe.push(user._id);
+      user.save();
+      req.user.save();
+      res.status(200).json({ subscribe: 1 });
+    } else {
+      //console.log(2);
+      user.subscribed.splice(user.subscribed.indexOf(req.user._id), 1);
+      req.user.subscribe.splice(req.user.subscribe.indexOf(user._id), 1);
+      user.save();
+      req.user.save();
+      console.log(req.user);
+      res.status(200).json({ subscribe: 0 });
+    }
+  } catch (error) {
+    res.status(400).end();
   }
 };
