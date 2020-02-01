@@ -108,6 +108,7 @@ const setTotalTime = async () => {
   //duration = await getBlobDuration(blob);
   //console.log(duration + " seconds");
   const total = await formatTime(videoPlayer.duration);
+  console.log(total);
   totalTime.innerHTML = total;
 };
 const getCurrentTime = () => {
@@ -205,7 +206,9 @@ const init = () => {
 
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
   videoPlayer.addEventListener("loadeddata", () => {});
-  videoPlayer.addEventListener("canplay", () => {});
+  videoPlayer.addEventListener("canplay", () => {
+    console.log("can play");
+  });
   videoPlayer.addEventListener("ended", resetVideo); //reset video
   videoPlayer.addEventListener("timeupdate", updateProgressBar); //update progress bar event
   progressBar.addEventListener("click", clickedBar); //click progress bar
