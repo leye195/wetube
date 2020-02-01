@@ -98,7 +98,7 @@ const formatTime = seconds => {
   }
   return `${hours}:${minutes}:${totalSeconds}`;
 };
-const setTotalTime = async () => {
+const setTotalTime = async e => {
   /*const blob = await axios({
     url: videoPlayer.src,
     method: "get",
@@ -107,7 +107,7 @@ const setTotalTime = async () => {
   //const blob = await fetch(videoPlayer.src).then(response => response.blob());
   //duration = await getBlobDuration(blob);
   // console.log(duration + " seconds");
-  const total = await formatTime(videoPlayer.duration);
+  const total = await formatTime(e.target.duration);
   console.log(total);
   totalTime.innerHTML = total;
 };
@@ -199,15 +199,9 @@ const init = () => {
   muteBtn.addEventListener("click", handleMute);
   fullBtn.addEventListener("click", handleFullScreen);
 
-  videoPlayer.addEventListener("durationchange", () => {
-    const total = formatTime(videoPlayer.duration);
-    console.log(total);
-    console.log("--");
-    totalTime.innerHTML = total;
-  });
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
-  videoPlayer.addEventListener("loadeddata", setTotalTime);
-  videoPlayer.addEventListener("canplay", setTotalTime);
+  //videoPlayer.addEventListener("loadeddata", setTotalTime);
+  //videoPlayer.addEventListener("canplay", setTotalTime);
   videoPlayer.addEventListener("ended", resetVideo); //reset video
   videoPlayer.addEventListener("timeupdate", updateProgressBar); //update progress bar event
   progressBar.addEventListener("click", clickedBar); //click progress bar
