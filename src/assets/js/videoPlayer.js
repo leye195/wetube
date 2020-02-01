@@ -106,9 +106,9 @@ const setTotalTime = async () => {
   });*/
   const blob = await fetch(videoPlayer.src).then(response => response.blob());
   duration = await getBlobDuration(blob);
-  console.log(duration + " seconds");
-  const total = formatTime(duration);
-  //console.log(total);
+  // console.log(duration + " seconds");
+  const total = formatTime(duration.duration);
+  console.log(total);
   totalTime.innerHTML = total;
 };
 const getCurrentTime = () => {
@@ -188,11 +188,6 @@ const updateProgressBar = () => {
   progressBar.value = percentage;
 };
 const clickedBar = e => {
-  /*if (
-    document.fullscreen ||
-    document.mozFullScreen ||
-    document.webkitIsFullscreen
-  ) */
   let mouseX = (e.offsetX - progressBar.offsetLeft) / progressBar.offsetWidth;
   progressBar.value = mouseX * 100; //current position on progress bar
   videoPlayer.currentTime = (progressBar.value * videoPlayer.duration) / 100; //set newTime to watch
