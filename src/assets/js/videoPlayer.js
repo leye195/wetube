@@ -199,6 +199,12 @@ const init = () => {
   muteBtn.addEventListener("click", handleMute);
   fullBtn.addEventListener("click", handleFullScreen);
 
+  videoPlayer.addEventListener("durationchange", () => {
+    const total = formatTime(videoPlayer.duration);
+    console.log(total);
+    console.log("--");
+    totalTime.innerHTML = total;
+  });
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
   videoPlayer.addEventListener("loadeddata", setTotalTime);
   videoPlayer.addEventListener("canplay", setTotalTime);
