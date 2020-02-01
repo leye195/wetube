@@ -12,18 +12,18 @@
       margin: 10px 0;
     }
     .form-container {
-      max-width: 850px;
+      max-width: 100%;
       margin: 20px auto;
       form {
+        display: none;
         text-align: center;
         margin-bottom: 0;
         textarea {
-          max-width: 800px;
+          max-width: 100%;
         }
         .info__btn {
           display: flex;
           flex-direction: row-reverse;
-          margin-right: 25px;
           input[type="submit"],
           button {
             width: 60px;
@@ -34,9 +34,17 @@
         }
       }
     }
+    .description__container {
+      p {
+        word-break: break-all;
+        word-wrap: break-word;
+      }
+    }
   }
   .link__form {
+    display: none;
     form {
+      position: relative;
       .link__input {
         display: flex;
         flex-direction: row;
@@ -45,7 +53,11 @@
           border: 1px solid $dark-grey;
         }
       }
-
+      .confirm__link {
+        position: absolute;
+        right: 0;
+        margin-right: 5px;
+      }
       .delete_form {
         width: 50px;
         background-color: $light-grey;
@@ -53,6 +65,9 @@
       }
     }
   }
+  .description__btn,
+  .linkbtn,
+  .confirm__link,
   .add__link,
   .cancel__link {
     width: 60px;
@@ -61,5 +76,19 @@
     margin: 0;
     box-shadow: $shadow;
     margin-left: 5px;
+  }
+  .add__link {
+    margin-left: 0;
+  }
+  .linkbtn {
+    display: none;
+    margin-left: 0;
+  }
+  .description__btn {
+    display: none;
+    width: 100px;
+  }
+  .cur {
+    display: block !important;
   }
 }

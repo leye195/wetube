@@ -2,6 +2,7 @@ extends ./layouts/main.pug
 include partial/mixins/videoBlock
 include partial/mixins/bannerUpload
 include partial/mixins/channelBlock
+include partial/mixins/linkBlock
 
 block content
     .user-profile
@@ -76,27 +77,36 @@ block content
             .infoBlock
                 .info.info__description
                     p Description
+                    .description__container
+                        p #{user.description}
                     if loggedUser.id===user.id
                         .form-container
-                            form
+                            form.des__form
                                 textarea(name="description", cols="30", rows="8")
                                 .info__btn
                                     input(type="submit",value="Confirm")
                                     button.description__cancel Cancel
-                    else
-                        .description__container
-                            p Empty
+                            button.description__btn.cur
+                                i.fas.fa-plus-circle Description
                 .info.info__link
                     p Link
-                    if loggedUser.id===user.id
-                        .link__form
-                            form
-                        button.add__link 
-                            i.fas.fa-plus-circle  Add
-                        button.cancel__link Cancel
-                    else
-                        .link__container
+                    .link__container
+                        if user.links.lengh==0
                             p No Link
+                        else
+                            each link in user.links
+                                +linkBlock(link)
+                    if loggedUser.id===user.id
+                        button.linkbtn.cur
+                            i.fas.fa-plus-circle  Link
+                        .link__form
+                            form(method="post")
+                                input.confirm__link(type="submit",value="Confirm")
+                            button.add__link 
+                                i.fas.fa-plus-circle  Add
+                            
+                            button.cancel__link Cancel
+                        
 
 
 

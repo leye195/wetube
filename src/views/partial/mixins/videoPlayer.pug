@@ -1,10 +1,11 @@
 mixin videoPlayer(video={})
     .video__player#js__player
-        video(src=video.src)
+        video(src=video.src,preload="metadata")
         .videoPlayer__status
             span
                 i.fas.fa-play.fa-2x
         .videoPlayer__controls
+            progress#process-bar(max=100,value=0)
             .videoPlayer__column
                 span
                     i.fas.fa-play

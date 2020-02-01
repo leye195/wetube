@@ -48,7 +48,12 @@ const userSchema = new mongoose.Schema({
   ],
   bannerUrl: {
     type: String
-  }
+  },
+  description: {
+    type: String,
+    default: "Empty"
+  },
+  links: []
 });
 userSchema.plugin(passportLocalMongoose, { usernameField: "email" }); //plugin 추가
 //usernameField: 어떤 field를 username으로 설정할지 셋팅

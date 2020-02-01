@@ -304,3 +304,31 @@ export const postSubscribe = async (req, res) => {
     res.status(400).end();
   }
 };
+export const postDescription = (req, res) => {
+  const {
+    user,
+    body: { description }
+  } = req;
+  try {
+    user.description = description;
+    user.save();
+    res.status(200).json({ description });
+  } catch (error) {
+    res.status(400).end();
+  }
+};
+export const postLink = (req, res) => {
+  const {
+    user,
+    body: { links }
+  } = req;
+  try {
+    for (const iter of links) {
+      user.links.push(iter);
+    }
+    user.save();
+    res.status(200).json({ links: user.links });
+  } catch (error) {
+    res.status(400).end();
+  }
+};

@@ -11,10 +11,13 @@ const videoContainer = document.querySelector("#js__player"),
   volumeContainer = document.querySelector(".videoPlayer__volume"),
   volumeRange = document.querySelector("#videoPlayer__volume"),
   videoLike = document.querySelector(".video__up"),
-  videoUnLike = document.querySelector(".video__down");
+  videoUnLike = document.querySelector(".video__down"),
+  progressBar = document.querySelector("#process-bar");
 let time_id = undefined,
   cur_volume = 0.5,
-  vol_status = "fa-volume-down";
+  vol_status = "fa-volume-down",
+  percentage = 0,
+  duration = 0.0;
 
 const registerView = () => {
   const vid = window.location.href.split("/videos/")[1]; //pathname.slice(5,).split("/")[0];
@@ -23,11 +26,11 @@ const registerView = () => {
   });
 };
 const handlePlay = () => {
-  //console.log(videoPlayer.currentTime);
   if (playBtn.classList.contains("fa-play")) {
     playBtn.classList.remove("fa-play");
     playBtn.classList.add("fa-pause");
     videoPlayer.play();
+    time_id = setInterval(getCurrentTime, 700);
   } else if (playBtn.classList.contains("fa-pause")) {
     playBtn.classList.remove("fa-pause");
     playBtn.classList.add("fa-play");
@@ -64,7 +67,6 @@ const handleFullScreen = () => {
   fullBtn.removeEventListener("click", handleFullScreen);
   fullBtn.addEventListener("click", handleExitFullScreen);
 };
-const handelScreenClick = () => {};
 const handleExitFullScreen = () => {
   if (document.exitFullscreen) {
     document.exitFullscreen();
@@ -91,18 +93,22 @@ const formatTime = seconds => {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-  if (seconds < 10) {
+  if (totalSeconds < 10) {
     totalSeconds = `0${totalSeconds}`;
   }
   return `${hours}:${minutes}:${totalSeconds}`;
 };
-const setTotalTime = async () => {
-  const blob = await fetch(videoPlayer.src).then(response => response.blob());
-  const duration = await getBlobDuration(blob);
+const setTotalTime = () => {
+  /*const blob = await axios({
+    url: videoPlayer.src,
+    method: "get",
+    responseType: "blob"
+  });*/
+  //const blob = await fetch(videoPlayer.src).then(response => response.blob());
+  //duration = await getBlobDuration(blob);
   //console.log(duration + " seconds");
-  const total = formatTime(duration);
+  const total = formatTime(videoPlayer.duration);
   totalTime.innerHTML = total;
-  time_id = setInterval(getCurrentTime, 1000);
 };
 const getCurrentTime = () => {
   const time = formatTime(Math.floor(videoPlayer.currentTime));
@@ -111,11 +117,12 @@ const getCurrentTime = () => {
 const resetVideo = () => {
   registerView();
   videoPlayer.currentTime = 0;
+  progressBar.value = 0;
   playBtn.classList.remove("fa-pause");
   playBtn.classList.add("fa-play");
 };
 const handleDrag = e => {
-  console.log(e.target.value);
+  //console.log(e.target.value);
   videoPlayer.volume = e.target.value;
   if (videoPlayer.volume === 0) {
     muteBtn.classList.add("fa-volume-mute");
@@ -171,13 +178,38 @@ const handleUnlike = async e => {
     window.location.reload();
   }
 };
+
+//update progress bar on video
+const updateProgressBar = () => {
+  percentage = Math.floor(
+    (100 / videoPlayer.duration) * videoPlayer.currentTime
+  );
+  progressBar.value = percentage;
+};
+const clickedBar = e => {
+  /*if (
+    document.fullscreen ||
+    document.mozFullScreen ||
+    document.webkitIsFullscreen
+  ) */
+  let mouseX = (e.offsetX - progressBar.offsetLeft) / progressBar.offsetWidth;
+  progressBar.value = mouseX * 100; //current position on progress bar
+  videoPlayer.currentTime = (progressBar.value * videoPlayer.duration) / 100; //set newTime to watch
+};
 const init = () => {
   videoPlayer.volume = cur_volume;
+
   playBtn.addEventListener("click", handlePlay);
   muteBtn.addEventListener("click", handleMute);
   fullBtn.addEventListener("click", handleFullScreen);
+
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
+  videoPlayer.addEventListener("loadeddata", () => {});
+  videoPlayer.addEventListener("canplay", () => {});
   videoPlayer.addEventListener("ended", resetVideo); //reset video
+  videoPlayer.addEventListener("timeupdate", updateProgressBar); //update progress bar event
+  progressBar.addEventListener("click", clickedBar); //click progress bar
+
   volumeRange.addEventListener("input", handleDrag);
   volumeContainer.addEventListener("mouseover", handleMouseOver);
   volumeContainer.addEventListener("mouseleave", handleMouseLeave);
