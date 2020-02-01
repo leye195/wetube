@@ -104,10 +104,10 @@ const setTotalTime = async () => {
     method: "get",
     responseType: "blob"
   });*/
-  const blob = await fetch(videoPlayer.src).then(response => response.blob());
-  duration = await getBlobDuration(blob);
+  //const blob = await fetch(videoPlayer.src).then(response => response.blob());
+  //duration = await getBlobDuration(blob);
   // console.log(duration + " seconds");
-  const total = formatTime(duration.duration);
+  const total = await formatTime(videoPlayer.duration);
   console.log(total);
   totalTime.innerHTML = total;
 };
@@ -200,9 +200,10 @@ const init = () => {
   fullBtn.addEventListener("click", handleFullScreen);
 
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
-  /*videoPlayer.addEventListener("canplay", () => {
+  videoPlayer.addEventListener("loadeddata", () => {});
+  videoPlayer.addEventListener("canplay", () => {
     console.log("can play");
-  });*/
+  });
   videoPlayer.addEventListener("ended", resetVideo); //reset video
   videoPlayer.addEventListener("timeupdate", updateProgressBar); //update progress bar event
   progressBar.addEventListener("click", clickedBar); //click progress bar
