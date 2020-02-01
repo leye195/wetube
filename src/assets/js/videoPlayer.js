@@ -107,7 +107,7 @@ const setTotalTime = async () => {
   const blob = await fetch(videoPlayer.src).then(response => response.blob());
   duration = await getBlobDuration(blob);
   //console.log(duration + " seconds");
-  const total = formatTime(duration);
+  const total = await formatTime(duration);
   console.log(total);
   totalTime.innerHTML = total;
 };
