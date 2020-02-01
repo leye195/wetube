@@ -201,9 +201,7 @@ const init = () => {
 
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
   videoPlayer.addEventListener("loadeddata", setTotalTime);
-  videoPlayer.addEventListener("canplay", () => {
-    console.log("can play");
-  });
+  videoPlayer.addEventListener("canplay", setTotalTime);
   videoPlayer.addEventListener("ended", resetVideo); //reset video
   videoPlayer.addEventListener("timeupdate", updateProgressBar); //update progress bar event
   progressBar.addEventListener("click", clickedBar); //click progress bar
