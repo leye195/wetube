@@ -200,7 +200,7 @@ const init = () => {
   fullBtn.addEventListener("click", handleFullScreen);
 
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
-  videoPlayer.addEventListener("loadeddata", () => {});
+  videoPlayer.addEventListener("loadeddata", setTotalTime);
   videoPlayer.addEventListener("canplay", () => {
     console.log("can play");
   });
