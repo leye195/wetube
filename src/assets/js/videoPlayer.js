@@ -200,10 +200,9 @@ const init = () => {
   fullBtn.addEventListener("click", handleFullScreen);
 
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
-  videoPlayer.addEventListener("loadeddata", () => {});
-  videoPlayer.addEventListener("canplay", () => {
+  /*videoPlayer.addEventListener("canplay", () => {
     console.log("can play");
-  });
+  });*/
   videoPlayer.addEventListener("ended", resetVideo); //reset video
   videoPlayer.addEventListener("timeupdate", updateProgressBar); //update progress bar event
   progressBar.addEventListener("click", clickedBar); //click progress bar

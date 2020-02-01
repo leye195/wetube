@@ -22,7 +22,7 @@ block content
                 else
                     span.video__view=` ${video.view} views`
                 div.video__menu
-                    if loggedUser.id !== video.creator.id 
+                    if loggedUser && loggedUser.id !== video.creator.id 
                         if loggedUser.subscribe.indexOf(video.creator._id)===-1
                             button.sbtn.subscribe Subscribe
                         else
