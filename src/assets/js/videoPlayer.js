@@ -104,11 +104,11 @@ const setTotalTime = () => {
     method: "get",
     responseType: "blob"
   });*/
-  //const blob = await fetch(videoPlayer.src).then(response => response.blob());
-  //duration = await getBlobDuration(blob);
-  //console.log(duration + " seconds");
+  const blob = await fetch(videoPlayer.src).then(response => response.blob());
+  duration = await getBlobDuration(blob);
+  console.log(duration + " seconds");
   const total = formatTime(videoPlayer.duration);
-  console.log(total);
+  //console.log(total);
   totalTime.innerHTML = total;
 };
 const getCurrentTime = () => {
