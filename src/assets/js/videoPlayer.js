@@ -30,7 +30,6 @@ const handlePlay = () => {
     playBtn.classList.remove("fa-play");
     playBtn.classList.add("fa-pause");
     videoPlayer.play();
-    time_id = setInterval(getCurrentTime, 700);
   } else if (playBtn.classList.contains("fa-pause")) {
     playBtn.classList.remove("fa-pause");
     playBtn.classList.add("fa-play");
@@ -110,6 +109,7 @@ const setTotalTime = async e => {
   const total = await formatTime(e.target.duration);
   console.log(total);
   totalTime.innerHTML = total;
+  time_id = setInterval(getCurrentTime, 700);
 };
 const getCurrentTime = () => {
   const time = formatTime(Math.floor(videoPlayer.currentTime));
