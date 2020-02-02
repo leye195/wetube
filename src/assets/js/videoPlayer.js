@@ -97,7 +97,7 @@ const formatTime = seconds => {
   }
   return `${hours}:${minutes}:${totalSeconds}`;
 };
-const setTotalTime = async e => {
+const setTotalTime = e => {
   /*const blob = await axios({
     url: videoPlayer.src,
     method: "get",
@@ -106,7 +106,7 @@ const setTotalTime = async e => {
   //const blob = await fetch(videoPlayer.src).then(response => response.blob());
   //duration = await getBlobDuration(blob);
   // console.log(duration + " seconds");
-  const total = await formatTime(e.target.duration);
+  const total = formatTime(e.target.duration);
   console.log(total);
   totalTime.innerHTML = total;
   time_id = setInterval(getCurrentTime, 700);
