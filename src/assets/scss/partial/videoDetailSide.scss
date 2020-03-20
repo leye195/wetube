@@ -1,0 +1,27 @@
+.video-detail__side {
+  width: 200px;
+  margin: {
+    top: 10px;
+  }
+  .videoBlock {
+    margin-bottom: 20px;
+    video {
+      border-radius: 20px;
+    }
+    .video__context {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .videoBlock__title {
+        margin: {
+          right: 5px;
+          bottom: 0px;
+        }
+        white-space: pre;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 120px;
+      }
+    }
+  }
+}

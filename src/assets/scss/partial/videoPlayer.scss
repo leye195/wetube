@@ -9,6 +9,7 @@
     height: 100%;
     width: 100%;
     max-width: 100%;
+    border-radius: 20px;
   }
   .videoPlayer__status {
     position: absolute;
@@ -41,6 +42,8 @@
     padding: 10px;
     grid-template-columns: repeat(2, 1fr);
     transition: opacity 0.3s linear;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
     #process-bar {
       position: absolute;
       cursor: pointer;

@@ -63,6 +63,10 @@ export const videoDetail = async (req, res) => {
     params: { id }
   } = req;
   try {
+    const videos = await videoModel
+      .find()
+      .sort()
+      .limit(5);
     const video = await videoModel
       .findById(id)
       .populate({
@@ -73,7 +77,7 @@ export const videoDetail = async (req, res) => {
         }
       })
       .populate("creator");
-    res.render("videoDetail", { pageTitle: video.title, video });
+    res.render("videoDetail", { pageTitle: video.title, video, videos });
   } catch (error) {
     console.log(error);
     res.redirect(routes.home);

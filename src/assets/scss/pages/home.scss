@@ -2,4 +2,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
   grid-gap: 20px;
+  .videoBlock:first-child {
+    width: 50vw;
+    grid-column: 1/7;
+    justify-self: center;
+    margin-bottom: 15px;
+  }
 }
