@@ -106,10 +106,12 @@ const setTotalTime = e => {
   //const blob = await fetch(videoPlayer.src).then(response => response.blob());
   //duration = await getBlobDuration(blob);
   // console.log(duration + " seconds");
-  const total = formatTime(e.target.duration);
-  console.log(total);
-  totalTime.innerHTML = total;
-  time_id = setInterval(getCurrentTime, 700);
+  if (e.target.readyState >= 2) {
+    const total = formatTime(e.target.duration);
+    //console.log(total);
+    totalTime.innerHTML = total;
+    time_id = setInterval(getCurrentTime, 700);
+  }
 };
 const getCurrentTime = () => {
   const time = formatTime(Math.floor(videoPlayer.currentTime));
@@ -211,6 +213,10 @@ const init = () => {
   volumeContainer.addEventListener("mouseleave", handleMouseLeave);
   videoLike.addEventListener("click", handleLike);
   videoUnLike.addEventListener("click", handleUnlike);
+  if (videoPlayer.readyState >= 2) {
+    console.log("ready");
+    totalTime.innerHTML = formatTime(videoPlayer.duration);
+  }
 };
 
 if (videoContainer) {

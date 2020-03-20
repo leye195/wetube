@@ -37,11 +37,12 @@ YouTube Clone with VanillaJS & NodeJS(Express)
 
 - 1.youtube 클론 코딩을 진행하면 기존에 잘 모르고 사용했던 express 그리고 미들웨어 함수 설정에 대한 개념이 좀 더 명확해졌음!!!
 - 2.기초적이지만 babel, eslint ,webpack에 대한 설정을 통해 모던한 javascript를 사용한 코딩은 기존에 사용하던 코드 보다 더 간결하고 섹싀~ 해졌음(nomadCode 강의 너무 유익함)
+- 3.pug 템플릿을 이용해서 front 코딩 진행
 - 4.css가 아닌 scss로 스타일링 진행해 자주 사용하는 형태들은 mixin을 적용, 색깔 혹은 자주 사용 될 값들은 따로 변수로 관리 그리고 nested (어디에 속하는지 딱딱 알수 있어서 너무 좋음)를 이용할수 있다는게 기존의 css에서 생각했던 것과 달랐음
 - 5.passport.js 를 이용한 간편한 소셜 로그인 (물론 이해하는데 시간이 걸리지만), mongoDB, mongoose 활용
 - 6.multer를 이용한 파일 저장(초기에 그냥 서버에 파일을 저장해도 괜찮겠지??(서버가 무거워짐...) 했지만, storage에 업로드해 따로 관리를 해줘야됨
 - 7.video api 이용 방법 및 이벤트(loadeddata,loadedmetadata,canplay,ended,timeupdate 등)에 대한 이해.
-- (일단 이정도...더 적어야징...Challenge 진행중)
+- (일단 이정도...)
 
 ## Screen Shot
 
