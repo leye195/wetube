@@ -2,6 +2,7 @@ import routes from "./routes";
 import multer from "multer";
 import multerS3 from "multer-s3";
 import aws from "aws-sdk";
+import moment from "moment";
 
 const s3 = new aws.S3({
   secretAccessKey: process.env.AWS_SECRET,
@@ -30,16 +31,25 @@ const uploadBanner = multer({
     bucket: "wetuberbucket/banners"
   })
 });
+const uploadThumbnail = multer({
+  storage: multerS3({
+    s3,
+    acl: "public-read",
+    bucket: "wetuberbucket/thumbnails"
+  })
+});
 export const uploadVideoMiddleware = uploadVideo.single("videofile");
 export const uploadImageMiddleware = uploadImage.single("avatar");
 export const uploadBannerMiddleware = uploadBanner.single("banner");
+export const uploadThumbnailMiddleware = uploadThumbnail.single("thumbnail");
 
 export const localMiddleware = (req, res, next) => {
   //locals에 있는 것들은 템플릿에서 변수명 처럼 존재함
   res.locals.siteName = "Wetube";
   res.locals.routes = routes;
   res.locals.loggedUser = req.user || undefined; //passport에서 user를 로그인 시킬때 user object를 req.user에 저장해둠
-  console.log(req.user);
+  //console.log(req.user);
+  res.locals.moment = moment;
   next();
 };
 export const onlyPublic = (req, res, next) => {

@@ -9,7 +9,11 @@ import {
   getEditVideo,
   postEditVideo
 } from "../controller/videoController";
-import { uploadVideoMiddleware, onlyPrivate } from "../middlewares";
+import {
+  uploadVideoMiddleware,
+  onlyPrivate,
+  uploadThumbnailMiddleware
+} from "../middlewares";
 
 const videoRouter = express.Router();
 
@@ -25,7 +29,12 @@ videoRouter.get(routes.videoDetail(), videoDetail);
 
 // Edit Video
 videoRouter.get(routes.editVideo(), onlyPrivate, getEditVideo);
-videoRouter.post(routes.editVideo(), onlyPrivate, postEditVideo);
+videoRouter.post(
+  routes.editVideo(),
+  onlyPrivate,
+  uploadThumbnailMiddleware,
+  postEditVideo
+);
 
 // Delete Video
 videoRouter.get(routes.deleteVideo(), onlyPrivate, deleteVideo);

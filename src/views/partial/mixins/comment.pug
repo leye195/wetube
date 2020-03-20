@@ -5,10 +5,11 @@ mixin comment(comment={})
         .comment__main
             p.comment__header=comment.creator.name
             p.comment__content=comment.text
+            p.comment__created=`${moment(comment.createdAt).format("YYYY/MM/DD HH:MM:SS")}`
             if loggedUser 
                 span.comment__reply 
                     i.fas.fa-reply
                 if loggedUser.id===comment.creator.id
-                    span.comment__delete 
+                    span.comment__delete    
                         i.fas.fa-trash-alt
         

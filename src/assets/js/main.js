@@ -7,3 +7,5 @@ import "./addContent";
 import "./subscribe";
 import "./userHeader";
 import "./info";
+import "./thumbnailPreview";
+import "./videoPreview";

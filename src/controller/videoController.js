@@ -24,7 +24,7 @@ export const search = async (req, res) => {
       })
       .populate("creator")
       .sort({ _id: -1 });
-    console.log(video);
+    //console.log(video);
   } catch (error) {
     console.log(error);
   }
@@ -42,6 +42,7 @@ export const postUpload = async (req, res) => {
     body: { title, description },
     file: { location }
   } = req;
+  //console.log(req.files);
   // upload and save video,
   // 생성된 id를 이용해 videoDetail page로 이동
 
@@ -102,7 +103,13 @@ export const postEditVideo = async (req, res) => {
     params: { id }
   } = req;
   try {
-    await videoModel.findOneAndUpdate({ _id: id }, { title, description });
+    if (!req.file)
+      await videoModel.findOneAndUpdate({ _id: id }, { title, description });
+    else
+      await videoModel.findOneAndUpdate(
+        { _id: id },
+        { title, description, thumbnailUrl: req.file.location }
+      );
     res.redirect(routes.videoDetail(id));
   } catch (error) {
     res.redirect(routes.home);

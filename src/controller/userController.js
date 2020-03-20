@@ -170,7 +170,7 @@ export const postEditProfile = async (req, res) => {
     body: { name, email },
     file
   } = req;
-  console.log(file);
+  //console.log(file);
   try {
     await User.findByIdAndUpdate(
       { _id: req.user.id },
@@ -297,7 +297,7 @@ export const postSubscribe = async (req, res) => {
       req.user.subscribe.splice(req.user.subscribe.indexOf(user._id), 1);
       user.save();
       req.user.save();
-      console.log(req.user);
+      //console.log(req.user);
       res.status(200).json({ subscribe: 0 });
     }
   } catch (error) {

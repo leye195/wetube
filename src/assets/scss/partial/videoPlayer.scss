@@ -1,5 +1,6 @@
 .video__player {
   position: relative;
+  margin-bottom: 10px;
   &:hover {
     .videoPlayer__controls {
       opacity: 1;

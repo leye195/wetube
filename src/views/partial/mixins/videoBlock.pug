@@ -1,7 +1,7 @@
 mixin videoBlock(video={})
     .videoBlock
         a(href=routes.videoDetail(video.id))
-            video.videoBlock__thumbnail(src=`${video.fileUrl}`)
+            video.videoBlock__thumbnail(src=`${video.fileUrl}` preload)
             div.video__context
                 h4.videoBlock__title=video.title
                 .video__view_creator
