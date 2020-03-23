@@ -2,11 +2,13 @@
   width: 200px;
   margin-top: 10px;
   padding-left: 10px;
-  border-left: 3px solid $black;
+  border-left: 3px solid #bcbcf1;
+
   .videoBlock {
     margin-bottom: 20px;
     video {
       border-radius: 20px;
+      border: 5px solid #979afb85;
     }
     .video__context {
       display: flex;

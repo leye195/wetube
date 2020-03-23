@@ -160,14 +160,16 @@ export const postComment = async (req, res) => {
     } = req;
     if (user === undefined) throw Error();
     const video = await videoModel.findById(id);
-    const newComment = await commentModel.create({
+    let newComment = await commentModel.create({
       text: comment,
       creator: user.id
     });
+    newComment = await newComment.populate("creator").execPopulate();
     video.comments.push(newComment.id);
+    newComment.save();
     video.save();
-    res.status(200);
-    res.json(user);
+    console.log(newComment);
+    res.json(newComment);
   } catch (error) {
     res.status(400);
     res.end();
@@ -205,10 +207,13 @@ export const postLikeVideo = async (req, res) => {
       }
       video.like.push(req.user.id);
       user.likes.push(video._id);
-      video.save();
-      user.save();
       req.flash("info", "Added to like list");
+    } else {
+      video.like.splice(video.like.indexOf(req.user.id), 1);
+      user.likes.splice(user.likes.indexOf(video._id));
     }
+    video.save();
+    user.save();
     res.status(200).json({ like: video.like, unlike: video.unlike });
   } catch (error) {
     res.status(400).end();
@@ -221,17 +226,20 @@ export const postUnlikeVideo = async (req, res) => {
       user
     } = req;
     const video = await videoModel.findById(id);
-    if (video.unlike.indexOf(req.user.id) === -1) {
-      if (video.like.indexOf(req.user.id) !== -1) {
-        video.like.splice(video.like.indexOf(req.user.id, 1));
+    if (video.unlike.indexOf(user.id) === -1) {
+      if (video.like.indexOf(user.id) !== -1) {
+        video.like.splice(video.like.indexOf(user.id, 1));
         user.likes.splice(user.likes.indexOf(video._id), 1);
       }
-      video.unlike.push(req.user.id);
+      video.unlike.push(user.id);
       user.unlikes.push(video._id);
-      video.save();
-      user.save();
       req.flash("info", "unlike the video");
+    } else {
+      video.unlike.splice(video.unlike.indexOf(user.id), 1);
+      user.unlikes.splice(user.unlikes.indexOf(video._id), 1);
     }
+    video.save();
+    user.save();
     res.status(200).json({ unlike: video.unlike, like: video.like });
   } catch (error) {
     res.status(400).end();

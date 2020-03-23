@@ -13,6 +13,18 @@ const commentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Video" // objectID가 어디로 부터 온것인지 ref를 통해 설정
   },
+  like: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    }
+  ],
+  unlike: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    }
+  ],
   creator: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"

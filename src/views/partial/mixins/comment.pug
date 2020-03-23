@@ -5,7 +5,15 @@ mixin comment(comment={})
         .comment__main
             p.comment__header=comment.creator.name
             p.comment__content=comment.text
-            p.comment__created=`${moment(comment.createdAt).format("YYYY/MM/DD HH:MM:SS")}`
+            .comment__time__wrapper
+                p.comment__created=`${moment(comment.createdAt).format("YYYY/MM/DD HH:MM:SS")}`
+                .comment__btn__container(data-id=comment.id)
+                    span.comment__like
+                        i.fa.fa-thumbs-up
+                        span.comment__like__cnt=`${comment.like.length}`
+                    span.comment__unlike
+                        i.fa.fa-thumbs-down
+                        span.comment__unlike__cnt=`${comment.unlike.length}`
             if loggedUser 
                 span.comment__reply 
                     i.fas.fa-reply

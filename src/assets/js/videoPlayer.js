@@ -125,7 +125,6 @@ const resetVideo = () => {
   playBtn.classList.add("fa-play");
 };
 const handleDrag = e => {
-  //console.log(e.target.value);
   videoPlayer.volume = e.target.value;
   if (videoPlayer.volume === 0) {
     muteBtn.classList.add("fa-volume-mute");
@@ -151,6 +150,11 @@ const handleMouseOver = e => {
 const handleMouseLeave = e => {
   volumeRange.style.opacity = 0.0;
 };
+const isClicked = (cnt, thumb) => {
+  return (
+    cnt.classList.contains("clicked") && thumb.classList.contains("clicked")
+  );
+};
 const handleLike = async e => {
   const id = window.location.href.split("/videos/")[1];
   const response = await axios({
@@ -161,9 +165,22 @@ const handleLike = async e => {
     const {
       data: { like, unlike }
     } = response;
-    document.querySelector(".like__count").innerHTML = like.length;
-    document.querySelector(".unlike__count").innerHTML = unlike.length;
-    window.location.reload();
+    const likeCnt = document.querySelector(".like__count"),
+      unlikeCnt = document.querySelector(".unlike__count"),
+      thumbUp = document.querySelector(".fa-thumbs-up"),
+      thumbDown = document.querySelector(".fa-thumbs-down");
+
+    if (isClicked(likeCnt, thumbUp)) {
+      likeCnt.classList.remove("clicked");
+      thumbUp.classList.remove("clicked");
+    } else {
+      likeCnt.classList.add("clicked");
+      thumbUp.classList.add("clicked");
+      unlikeCnt.classList.remove("clicked");
+      thumbDown.classList.remove("clicked");
+    }
+    likeCnt.innerHTML = like.length;
+    unlikeCnt.innerHTML = unlike.length;
   }
 };
 const handleUnlike = async e => {
@@ -176,9 +193,22 @@ const handleUnlike = async e => {
     const {
       data: { unlike, like }
     } = response;
-    document.querySelector(".like__count").innerHTML = like.length;
-    document.querySelector(".unlike__count").innerHTML = unlike.length;
-    window.location.reload();
+    const likeCnt = document.querySelector(".like__count"),
+      unlikeCnt = document.querySelector(".unlike__count"),
+      thumbUp = document.querySelector(".fa-thumbs-up"),
+      thumbDown = document.querySelector(".fa-thumbs-down");
+
+    if (isClicked(unlikeCnt, thumbDown)) {
+      unlikeCnt.classList.remove("clicked");
+      thumbDown.classList.remove("clicked");
+    } else {
+      likeCnt.classList.remove("clicked");
+      thumbUp.classList.remove("clicked");
+      unlikeCnt.classList.add("clicked");
+      thumbDown.classList.add("clicked");
+    }
+    likeCnt.innerHTML = like.length;
+    unlikeCnt.innerHTML = unlike.length;
   }
 };
 

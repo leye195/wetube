@@ -48,6 +48,36 @@
         .comment__content {
           padding: 10px 5px;
         }
+        .comment__time__wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .comment__like {
+            margin-right: 15px;
+            cursor: pointer;
+            .fa-thumbs-up {
+              color: #8e8e8e;
+              &:hover {
+                color: black;
+              }
+            }
+            .comment__like__cnt {
+              margin-left: 5px;
+            }
+          }
+          .comment__unlike {
+            cursor: pointer;
+            .fa-thumbs-down {
+              color: #8e8e8e;
+              &:hover {
+                color: black;
+              }
+            }
+            .comment__unlike__cnt {
+              margin-left: 5px;
+            }
+          }
+        }
         .comment__created {
           padding-left: 5px;
           font-size: 0.8rem;

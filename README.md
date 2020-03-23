@@ -43,7 +43,7 @@ YouTube Clone with VanillaJS & NodeJS(Express)
 - 6.multer를 이용한 파일 저장(초기에 그냥 서버에 파일을 저장해도 괜찮겠지??(서버가 무거워짐...) 했지만, storage에 업로드해 따로 관리를 해줘야됨
 - 7.video api 이용 방법 및 이벤트(loadeddata,loadedmetadata,canplay,ended,timeupdate 등)에 대한 이해.
 - 8.복습을 통한 지식 유지와 기능 추가 및 스타일 수정 (home에서 보이는 video에 대해서 hover을 하여 preview 가능하게 해줌, 유저 아바타 이미지 preview 추가 및 videoDetail에서 옆 사이드에 video 리스트들을 최신 순으로 추가해줌)
-- 9.전체적으로 기능 구현 및 수정은 끝났음(물론 계속 추가할것이지만) 모바일에도 대응할수 있는 반응형 UI 작업 진행 예정
+- 9.댓글 좋아요,싫어요 클릭/취소 (및 답글 기능 추가 예정) ,전체적으로 기능 구현 및 수정은 끝났음() 모바일에도 대응할수 있는 반응형 UI 작업 진행 예정
 
 ## Screen Shot
 
