@@ -16,7 +16,8 @@ mixin comment(comment={})
                             i.fa.fa-thumbs-down
                             span.comment__unlike__cnt=`${comment.unlike.length}`
                 if loggedUser 
-                    span.comment__reply 
+                    span.comment__reply
+                        span.replytool reply
                         i.fas.fa-reply
                     if loggedUser.id===comment.creator.id
                         span.comment__delete    

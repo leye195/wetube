@@ -155,32 +155,49 @@ const isClicked = (cnt, thumb) => {
     cnt.classList.contains("clicked") && thumb.classList.contains("clicked")
   );
 };
+const checkUser = (className, target) => {
+  if (
+    target.classList.contains(className) &&
+    target.querySelector(".unlogged") === null
+  )
+    return true;
+  if (
+    !target.classList.contains(className) &&
+    !target.classList.contains(".unlogged")
+  )
+    return true;
+  return false;
+};
 const handleLike = async e => {
   const id = window.location.href.split("/videos/")[1];
   const response = await axios({
     url: `/api/${id}/like`,
     method: "POST"
   });
-  if (response.status === 200) {
-    const {
-      data: { like, unlike }
-    } = response;
-    const likeCnt = document.querySelector(".like__count"),
-      unlikeCnt = document.querySelector(".unlike__count"),
-      thumbUp = document.querySelector(".fa-thumbs-up"),
-      thumbDown = document.querySelector(".fa-thumbs-down");
+  if (checkUser("video__up", e.target)) {
+    if (response.status === 200) {
+      const {
+        data: { like, unlike }
+      } = response;
+      const likeCnt = document.querySelector(".like__count"),
+        unlikeCnt = document.querySelector(".unlike__count"),
+        thumbUp = document.querySelector(".fa-thumbs-up"),
+        thumbDown = document.querySelector(".fa-thumbs-down");
 
-    if (isClicked(likeCnt, thumbUp)) {
-      likeCnt.classList.remove("clicked");
-      thumbUp.classList.remove("clicked");
-    } else {
-      likeCnt.classList.add("clicked");
-      thumbUp.classList.add("clicked");
-      unlikeCnt.classList.remove("clicked");
-      thumbDown.classList.remove("clicked");
+      if (isClicked(likeCnt, thumbUp)) {
+        likeCnt.classList.remove("clicked");
+        thumbUp.classList.remove("clicked");
+      } else {
+        likeCnt.classList.add("clicked");
+        thumbUp.classList.add("clicked");
+        unlikeCnt.classList.remove("clicked");
+        thumbDown.classList.remove("clicked");
+      }
+      likeCnt.innerHTML = like.length;
+      unlikeCnt.innerHTML = unlike.length;
     }
-    likeCnt.innerHTML = like.length;
-    unlikeCnt.innerHTML = unlike.length;
+  } else {
+    alert("Please Login");
   }
 };
 const handleUnlike = async e => {
@@ -189,26 +206,29 @@ const handleUnlike = async e => {
     url: `/api/${id}/unlike`,
     method: "POST"
   });
-  if (response.status === 200) {
-    const {
-      data: { unlike, like }
-    } = response;
-    const likeCnt = document.querySelector(".like__count"),
-      unlikeCnt = document.querySelector(".unlike__count"),
-      thumbUp = document.querySelector(".fa-thumbs-up"),
-      thumbDown = document.querySelector(".fa-thumbs-down");
-
-    if (isClicked(unlikeCnt, thumbDown)) {
-      unlikeCnt.classList.remove("clicked");
-      thumbDown.classList.remove("clicked");
-    } else {
-      likeCnt.classList.remove("clicked");
-      thumbUp.classList.remove("clicked");
-      unlikeCnt.classList.add("clicked");
-      thumbDown.classList.add("clicked");
+  if (checkUser("video__down", e.target)) {
+    if (response.status === 200) {
+      const {
+        data: { unlike, like }
+      } = response;
+      const likeCnt = document.querySelector(".like__count"),
+        unlikeCnt = document.querySelector(".unlike__count"),
+        thumbUp = document.querySelector(".fa-thumbs-up"),
+        thumbDown = document.querySelector(".fa-thumbs-down");
+      if (isClicked(unlikeCnt, thumbDown)) {
+        unlikeCnt.classList.remove("clicked");
+        thumbDown.classList.remove("clicked");
+      } else {
+        likeCnt.classList.remove("clicked");
+        thumbUp.classList.remove("clicked");
+        unlikeCnt.classList.add("clicked");
+        thumbDown.classList.add("clicked");
+      }
+      likeCnt.innerHTML = like.length;
+      unlikeCnt.innerHTML = unlike.length;
     }
-    likeCnt.innerHTML = like.length;
-    unlikeCnt.innerHTML = unlike.length;
+  } else {
+    alert("Please Login");
   }
 };
 

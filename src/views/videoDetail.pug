@@ -29,19 +29,27 @@ block content
                             else
                                 button.sbtn.subscribed Subscribed
                         button.video__up
-                            if video.like.indexOf(loggedUser.id)===-1
+                            if loggedUser
+                                if video.like.indexOf(loggedUser.id)===-1
+                                    span.like__count=video.like.length
+                                    i.far.fa-thumbs-up
+                                else
+                                    span.like__count.clicked=video.like.length
+                                    i.far.fa-thumbs-up.clicked
+                            else
                                 span.like__count=video.like.length
-                                i.far.fa-thumbs-up
-                            else
-                                span.like__count.clicked=video.like.length
-                                i.far.fa-thumbs-up.clicked
+                                i.far.fa-thumbs-up.unlogged
                         button.video__down
-                            if video.unlike.indexOf(loggedUser.id)===-1
-                                span.unlike__count=video.unlike.length
-                                i.far.fa-thumbs-down
+                            if loggedUser
+                                if video.unlike.indexOf(loggedUser.id)===-1
+                                    span.unlike__count=video.unlike.length
+                                    i.far.fa-thumbs-down
+                                else
+                                    span.unlike__count.clicked=video.unlike.length
+                                    i.far.fa-thumbs-down.clicked
                             else
-                                span.unlike__count.clicked=video.unlike.length
-                                i.far.fa-thumbs-down.clicked
+                                span.unlike__count=video.unlike.length
+                                i.far.fa-thumbs-down.unlogged
                 p.video__description=video.description
             .video__comment
                 if video.comments.length===1

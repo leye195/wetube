@@ -44,6 +44,7 @@
           width: 35px;
           height: 35px;
           border-radius: 50%;
+          cursor: pointer;
         }
       }
     }
@@ -51,6 +52,7 @@
       margin-left: 10px;
       .reply__header {
         margin-bottom: 5px;
+        cursor: pointer;
       }
       .reply__created {
         font-size: 0.7rem;

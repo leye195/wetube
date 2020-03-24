@@ -207,7 +207,7 @@ export const postLikeVideo = async (req, res) => {
       }
       video.like.push(req.user.id);
       user.likes.push(video._id);
-      req.flash("info", "Added to like list");
+      //req.flash("info", "Added to like list");
     } else {
       video.like.splice(video.like.indexOf(req.user.id), 1);
       user.likes.splice(user.likes.indexOf(video._id));
@@ -233,7 +233,7 @@ export const postUnlikeVideo = async (req, res) => {
       }
       video.unlike.push(user.id);
       user.unlikes.push(video._id);
-      req.flash("info", "unlike the video");
+      //req.flash("info", "unlike the video");
     } else {
       video.unlike.splice(video.unlike.indexOf(user.id), 1);
       user.unlikes.splice(user.unlikes.indexOf(video._id), 1);
