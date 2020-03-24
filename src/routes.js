@@ -35,6 +35,7 @@ const KAKAO_CALLBACK = "/auth/kakao/callback";
 const API = "/api";
 const UNLIKE_COMMENT = "/comment/:id/unlike";
 const LIKE_COMMENT = "/comment/:id/like";
+const REPLY = "/comment/:id/reply";
 const REGISTER_VIEW = "/:id/view"; //video view
 const LIKE = "/:id/like";
 const UNLIKE = "/:id/unlike";
@@ -90,6 +91,7 @@ const routes = {
   description: DESCRIPTION,
   link: LINK,
   likeComment: LIKE_COMMENT,
-  unlikeComment: UNLIKE_COMMENT
+  unlikeComment: UNLIKE_COMMENT,
+  reply: REPLY
 };
 export default routes;

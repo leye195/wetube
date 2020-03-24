@@ -1,0 +1,60 @@
+.comment__reply__form {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .reply__text {
+    max-width: 100%;
+    border-radius: 5px;
+  }
+  .btn__container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    & {
+      .reply__submit,
+      .reply__cancel {
+        &.reply__submit {
+          background-color: $light-blue;
+          color: white;
+        }
+        width: 10%;
+      }
+    }
+  }
+}
+.reply__cnt {
+  cursor: pointer;
+  &:hover {
+    color: $light-blue;
+  }
+}
+.comment__replies_container {
+  .reply__ul {
+    margin-top: 10px;
+    &.hidden {
+      display: none;
+    }
+    .reply__body {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 10px;
+      .reply__author {
+        img {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+        }
+      }
+    }
+    .reply__main {
+      margin-left: 10px;
+      .reply__header {
+        margin-bottom: 5px;
+      }
+      .reply__created {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}

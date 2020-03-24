@@ -9,3 +9,4 @@ import "./userHeader";
 import "./info";
 import "./thumbnailPreview";
 import "./videoPreview";
+import "./replyComment";

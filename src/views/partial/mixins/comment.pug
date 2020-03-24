@@ -1,23 +1,36 @@
-mixin comment(comment={})
-    .comment__body(id=comment.id)
-        .comment__author
-            img(src=comment.creator.avatarUrl)
-        .comment__main
-            p.comment__header=comment.creator.name
-            p.comment__content=comment.text
-            .comment__time__wrapper
-                p.comment__created=`${moment(comment.createdAt).format("YYYY/MM/DD HH:MM:SS")}`
-                .comment__btn__container(data-id=comment.id)
-                    span.comment__like
-                        i.fa.fa-thumbs-up
-                        span.comment__like__cnt=`${comment.like.length}`
-                    span.comment__unlike
-                        i.fa.fa-thumbs-down
-                        span.comment__unlike__cnt=`${comment.unlike.length}`
-            if loggedUser 
-                span.comment__reply 
-                    i.fas.fa-reply
-                if loggedUser.id===comment.creator.id
-                    span.comment__delete    
-                        i.fas.fa-trash-alt
+mixin comment(comment={})  
+    .comment__wrapper(id=comment.id)
+        .comment__body
+            .comment__author
+                img(src=comment.creator.avatarUrl)
+            .comment__main
+                p.comment__header=comment.creator.name
+                p.comment__content=comment.text
+                .comment__time__wrapper
+                    p.comment__created=`${moment(comment.createdAt).format("YYYY/MM/DD HH:MM:SS")}`
+                    .comment__btn__container(data-id=comment.id)
+                        span.comment__like
+                            i.fa.fa-thumbs-up
+                            span.comment__like__cnt=`${comment.like.length}`
+                        span.comment__unlike
+                            i.fa.fa-thumbs-down
+                            span.comment__unlike__cnt=`${comment.unlike.length}`
+                if loggedUser 
+                    span.comment__reply 
+                        i.fas.fa-reply
+                    if loggedUser.id===comment.creator.id
+                        span.comment__delete    
+                            i.fas.fa-trash-alt
+        .comment__reply__form(style={"display":"none"})
+            input.reply__text(type="text",name="reply",placeholder="reply to comment")
+            .btn__container
+                button.reply__submit Reply
+                button.reply__cancel Cancel
+        .comment__replies_container
+            p.reply__cnt=`${comment.reply.length} Replies`
+            ul.reply__ul.hidden
+
+
+
+
         

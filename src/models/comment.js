@@ -25,6 +25,12 @@ const commentSchema = new mongoose.Schema({
       ref: "User"
     }
   ],
+  reply: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Reply"
+    }
+  ],
   creator: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
