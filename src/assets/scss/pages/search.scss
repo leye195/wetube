@@ -6,10 +6,9 @@
   border-bottom: 1px solid;
 }
 .search__videos {
-  display: flex;
-  flex-direction: column;
-
+  @include flex(column, center, center);
   .videoBlock {
+    width: 80%;
     padding: 10px;
     background-color: $white;
     box-shadow: 2px 3px 14px 1px #0000002b;
@@ -27,7 +26,7 @@
         width: 100%;
         .videoBlock__title {
           font-weight: 400;
-          font-size: 1.5rem;
+          font-size: 1.2rem;
         }
       }
     }

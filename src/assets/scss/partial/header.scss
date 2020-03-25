@@ -1,55 +1,225 @@
-.header {
-  position: fixed;
-  top: 0;
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  height: 50px;
-  background-color: $white;
-  z-index: 1;
-  .header__column {
-    &:first-child {
-      padding: 10px;
-      position: absolute;
-      left: 0;
-      a i {
-        color: $red;
+@include mobile {
+  .header {
+    position: fixed;
+    top: 0;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background-color: $white;
+    z-index: 1;
+    .header__column {
+      .mobile {
+        position: absolute;
+        right: 0;
+        top: -9px;
+        cursor: pointer;
+        @include flex(column, center, center);
+        .bar {
+          width: 30px;
+          height: 4px;
+          background-color: $light-grey;
+          margin: 3px;
+        }
       }
-    }
-    &:nth-child(2) {
-      width: 800px;
-      form {
-        width: 100%;
-        max-width: 640px;
-        margin: 0 auto;
-        border-radius: 1px;
-        border: 1px solid #e3e3e3;
-        input {
-          width: 100%;
-          padding: 5px 10px;
-          font-size: 15px;
-          color: $black;
-          font-weight: 300;
-          &::placeholder {
-            color: $dark-grey;
+      &:first-child {
+        padding: 10px;
+        left: 0;
+        a i {
+          color: $red;
+        }
+      }
+      &:nth-child(2) {
+        width: 800px;
+        form {
+          width: 75%;
+          max-width: 640px;
+          border-radius: 1px;
+          border: 1px solid #e3e3e3;
+          input {
+            width: 95%;
+            padding: 5px 10px;
+            font-size: 15px;
+            color: $black;
+            font-weight: 300;
+            &::placeholder {
+              color: $dark-grey;
+            }
+          }
+        }
+      }
+      &:nth-child(3) {
+        position: absolute;
+        right: 10px;
+        .show {
+          display: flex !important;
+          position: absolute;
+          top: 25px;
+          right: -9px;
+          width: 120px;
+          background: white;
+          height: 95vh;
+          box-shadow: -2px 3px 2px 1px #0000003d;
+        }
+        .header__ul {
+          display: none;
+          flex-direction: column;
+          padding: $noPadding;
+          li {
+            list-style: $listStyle;
+            padding: 10px;
+            a {
+              color: $black;
+              text-decoration: none;
+            }
           }
         }
       }
     }
-    &:nth-child(3) {
-      position: absolute;
-      right: 10px;
-      ul {
-        display: $displayFlex;
-        flex-direction: row;
-        padding: $noPadding;
-        li {
-          list-style: $listStyle;
-          padding: 10px;
-          a {
+  }
+}
+@include tablet {
+  .header {
+    position: fixed;
+    top: 0;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background-color: $white;
+    z-index: 1;
+    .header__column {
+      .mobile {
+        position: absolute;
+        right: 0;
+        top: -9px;
+        cursor: pointer;
+        @include flex(column, center, center);
+        .bar {
+          width: 30px;
+          height: 4px;
+          background-color: $light-grey;
+          margin: 3px;
+        }
+      }
+      &:first-child {
+        padding: 10px;
+        position: absolute;
+        left: 0;
+        a i {
+          color: $red;
+        }
+      }
+      &:nth-child(2) {
+        width: 800px;
+        form {
+          width: 100%;
+          max-width: 640px;
+          margin: 0 auto;
+          border-radius: 1px;
+          border: 1px solid #e3e3e3;
+          input {
+            width: 100%;
+            padding: 5px 10px;
+            font-size: 15px;
             color: $black;
-            text-decoration: none;
+            font-weight: 300;
+            &::placeholder {
+              color: $dark-grey;
+            }
+          }
+        }
+      }
+      &:nth-child(3) {
+        position: absolute;
+        right: 10px;
+        .show {
+          display: flex !important;
+          position: absolute;
+          top: 25px;
+          right: -9px;
+          width: 120px;
+          background: white;
+          height: 95vh;
+          box-shadow: -2px 3px 2px 1px #0000003d;
+        }
+        .header__ul {
+          display: none;
+          flex-direction: column;
+          padding: $noPadding;
+          li {
+            list-style: $listStyle;
+            padding: 10px;
+            font-size: 1rem;
+            a {
+              color: $black;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@include desktop {
+  .header {
+    position: fixed;
+    top: 0;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background-color: $white;
+    z-index: 1;
+    .header__column {
+      .mobile {
+        display: none;
+      }
+      &:first-child {
+        padding: 10px;
+        position: absolute;
+        left: 0;
+        a i {
+          color: $red;
+        }
+      }
+      &:nth-child(2) {
+        width: 800px;
+        form {
+          width: 100%;
+          max-width: 640px;
+          margin: 0 auto;
+          border-radius: 1px;
+          border: 1px solid #e3e3e3;
+          input {
+            width: 100%;
+            padding: 5px 10px;
+            font-size: 15px;
+            color: $black;
+            font-weight: 300;
+            &::placeholder {
+              color: $dark-grey;
+            }
+          }
+        }
+      }
+      &:nth-child(3) {
+        position: absolute;
+        right: 10px;
+        ul {
+          display: $displayFlex;
+          flex-direction: row;
+          padding: $noPadding;
+          li {
+            list-style: $listStyle;
+            padding: 10px;
+            a {
+              color: $black;
+              text-decoration: none;
+            }
           }
         }
       }

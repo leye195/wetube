@@ -14,11 +14,11 @@ block content
         .user-profile__header
             img.u-avatar(src=user.avatarUrl)
             h4.profile__username=user.name
-        if loggedUser.id !==  user.id
+        if loggedUser&&loggedUser.id !==  user.id
                     if user.subscribed.indexOf(loggedUser.id)===-1
-                        button.sbtn.subscribe Subscribe
+                        button.sbtn.subscribe(data-id=user.id) Subscribe
                     else
-                        button.sbtn.subscribed Subscribed
+                        button.sbtn.subscribed(data-id=user.id) Subscribed
         if loggedUser && user.id===loggedUser.id
             .user-profile__btns
                 a(href=`/users${routes.editProfile}`)
@@ -41,25 +41,8 @@ block content
                 .videos
                     each video in user.likes
                         +videoBlock(video)
-            if loggedUser && user.id===loggedUser.id
-                .user-profile__videos.wvideo
-                    .user-profile__section
-                        .user-profile__sectionbtn
-                            button Add Section
-                        .user-profile__form
-                            form
-                                label
-                                    span.label__span Contents
-                                    select
-                                        option(selected) Contents Select
-                                        optgroup(label="Video")
-                                            option(value="Popular") Popular upload
-                                        optgroup(label="Channel")
-                                            option(value="Subscribed") Subscribed
-                                div.formbtn__container
-                                    input(type="submit",value="Confirm")
-                                    button Cancel
         .video__section
+            p.upload__label Uploaded Videos
             if user.videos.length>0
                 .videos       
                     each video in user.videos
@@ -67,19 +50,20 @@ block content
             else
                 .video__empty Video Empty
         div.channel__section
+            p.channel__label Channels
             if user.subscribe.length>0
                 .channels
                     each channel in user.subscribe
                         +channelBlock(channel)
             else
-                p Channel Empty
+                p No Channels Subscribed
         div.info__section
             .infoBlock
                 .info.info__description
-                    p Description
+                    p.description__label Description
                     .description__container
                         p #{user.description}
-                    if loggedUser.id===user.id
+                    if loggedUser&&loggedUser.id===user.id
                         .form-container
                             form.des__form
                                 textarea(name="description", cols="30", rows="8")
@@ -96,7 +80,7 @@ block content
                         else
                             each link in user.links
                                 +linkBlock(link)
-                    if loggedUser.id===user.id
+                    if loggedUser&&loggedUser.id===user.id
                         button.linkbtn.cur
                             i.fas.fa-plus-circle  Link
                         .link__form

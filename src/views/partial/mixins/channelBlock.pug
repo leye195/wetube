@@ -3,7 +3,8 @@ mixin channelBlock(channel={})
         a(href=routes.userDetail(channel.id),id=channel.id)
             img(src=channel.avatarUrl, alt=channel.name)
             p=channel.name
-        if loggedUser.subscribe.indexOf(channel._id)!==-1 
-            button.sbtn.subscribed Subscribed
-        else
-            button.sbtn.subscribe Subscribe
+        if loggedUser
+            if loggedUser.subscribe.indexOf(channel._id)!==-1 
+                button.sbtn.subscribed(data-id=channel._id) Subscribed
+            else
+                button.sbtn.subscribe(data-id=channel._id) Subscribe

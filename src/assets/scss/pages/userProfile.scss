@@ -35,6 +35,8 @@
     .upload__label,
     .liked__label {
       margin: 10px 0;
+      font-family: sans-serif;
+      font-weight: 800;
     }
   }
   .wvideo {
@@ -99,5 +101,12 @@
     display: none;
     padding: 20px;
     width: 100%;
+    .upload__label,
+    .channel__label,
+    .description__label {
+      margin: 10px 0;
+      font-family: sans-serif;
+      font-weight: 800;
+    }
   }
 }

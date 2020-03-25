@@ -1,8 +1,27 @@
 import axios from "axios";
-let user_id = document.querySelector(".video__author a");
-const subscribe_btn = document.querySelector(".sbtn");
+//let user_id = document.querySelector(".video__author a");
+const subscribe_btn = document.querySelectorAll(".sbtn");
 const handleSubscribe = async e => {
-  let uid = "";
+  const {
+    target: { dataset }
+  } = e;
+  if (dataset.id) {
+    const response = await axios({
+      url: `/api/${dataset.id}/subscribe`,
+      method: "POST",
+      data: {
+        uid: dataset.id
+      }
+    });
+    if (response.status === 200) {
+      if (response.data.subscribe === 1) {
+        e.target.className = "sbtn subscribed";
+      } else if (response.data.subscribe === 0) {
+        e.target.className = "sbtn subscribe";
+      }
+    }
+  }
+  /*let uid = "";
   if (user_id !== null) {
     uid = user_id.href.split("/users/")[1];
   } else {
@@ -23,10 +42,12 @@ const handleSubscribe = async e => {
     } else if (response.data.subscribe === 0) {
       subscribe_btn.className = "sbtn subscribe";
     }
-  }
+  }*/
 };
 const init = () => {
-  subscribe_btn.addEventListener("click", handleSubscribe);
+  [].forEach.call(subscribe_btn, v => {
+    v.addEventListener("click", handleSubscribe);
+  });
 };
 if (subscribe_btn) {
   init();

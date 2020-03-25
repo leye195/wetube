@@ -10,3 +10,4 @@ import "./info";
 import "./thumbnailPreview";
 import "./videoPreview";
 import "./replyComment";
+import "./header";

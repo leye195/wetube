@@ -6,7 +6,10 @@ header.header
         form(action=routes.search,method="get")
             input(type="text",placeholder="Search by term..." name="term")  
     .header__column
-        ul
+        .mobile
+            .bar
+            .bar
+        ul.header__ul
             if !loggedUser
                 li
                     a(href=routes.join) Join 
