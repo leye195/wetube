@@ -51,5 +51,9 @@ app.use(routes.home, globalRouter); // index 경로
 app.use(routes.users, userRouter); // user 경로에 userRouter 적용
 app.use(routes.videos, videoRouter); // video 경로에 videoRouter 적용
 app.use(routes.api, apiRouter);
+app.use(function(req, res, next) {
+  //404 에러 처리
+  res.status(404).render("404");
+});
 
 export default app;

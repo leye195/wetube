@@ -1,0 +1,62 @@
+@include mobile {
+  .message-container {
+    @include flex(column, center, center);
+    h1 {
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 1px 1px #949494c4;
+      background: #0101028c;
+      padding: 6px;
+      border-radius: 20px;
+      margin: 5px;
+    }
+    img {
+      margin-top: 5px;
+      height: 50vh;
+      width: 60vw;
+    }
+  }
+}
+@include tablet {
+  .message-container {
+    @include flex(column, center, center);
+    h1 {
+      font-size: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 1px 1px #949494c4;
+      background: #0101028c;
+      border-radius: 10px;
+      padding: 5px;
+    }
+    img {
+      margin-top: 5px;
+      height: 70vh;
+    }
+  }
+}
+@include desktop {
+  .message-container {
+    @include flex(column, center, center);
+    h1 {
+      font-size: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 1px 1px #949494c4;
+      background: #0101028c;
+      padding: 5px;
+      border-radius: 10px;
+    }
+    img {
+      margin-top: 5px;
+      height: 60vh;
+    }
+  }
+}

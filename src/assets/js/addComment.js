@@ -26,10 +26,10 @@ import moment from "moment";
     });
     if (response.status === 200) {
       const {
-        creator: { name, avatarUrl },
+        creator: { _id: uid, name, avatarUrl },
         _id
       } = response.data;
-      addCommentTag(_id, comment, name, avatarUrl);
+      addCommentTag(_id, comment, name, avatarUrl, uid);
     }
   };
   const getCid = target => {
@@ -79,7 +79,8 @@ import moment from "moment";
     _id,
     comment,
     name,
-    avatarUrl = "/static/defautAvatar.png"
+    avatarUrl = "/static/defautAvatar.png",
+    uid
   ) => {
     const comments__container = document.querySelector(".comments__container"),
       comment__wrapper = document.createElement("div"),
@@ -101,12 +102,16 @@ import moment from "moment";
       unlikeBtn = document.createElement("span"),
       unlike_i = document.createElement("i"),
       like_cnt = document.createElement("span"),
-      unlike_cnt = document.createElement("span");
+      unlike_cnt = document.createElement("span"),
+      author__link = document.createElement("a"),
+      name__link = document.createElement("a");
 
     comment__wrapper.className = "comment__wrapper";
     time__wrapper.className = "comment__time__wrapper";
     btn__container.className = "comment__btn__container";
     btn__container.dataset.id = `${_id}`;
+    author__link.href = `/users/${uid}`;
+    name__link.href = `/users/${uid}`;
     comment__wrapper.id = `${_id}`;
     comment__body.className = "comment__body";
     comment__author.className = "comment__author";
@@ -129,7 +134,8 @@ import moment from "moment";
     like_i.addEventListener("click", handleLike);
     unlike_i.addEventListener("click", handleUnlike);
     author__img.src = avatarUrl;
-    comment__author.appendChild(author__img);
+    author__link.appendChild(author__img);
+    comment__author.appendChild(author__link);
 
     comment__header.innerHTML = name;
     comment__comment.innerHTML = comment;
@@ -150,8 +156,10 @@ import moment from "moment";
     time__wrapper.appendChild(comment__created);
     time__wrapper.appendChild(btn__container);
 
+    name__link.appendChild(comment__header);
+
     comment__main.appendChild(comment__header);
-    comment__main.appendChild(comment__comment);
+    comment__main.appendChild(name__link);
     comment__main.appendChild(time__wrapper);
     comment__main.appendChild(replyBtn);
     comment__main.appendChild(deleteBtn);
@@ -171,6 +179,7 @@ import moment from "moment";
     } else {
       commentNumber.textContent = `${number} comments`;
     }
+    window.location.reload();
   };
   const handleDelete = e => {
     const { target } = e;

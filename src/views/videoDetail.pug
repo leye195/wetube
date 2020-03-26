@@ -25,9 +25,9 @@ block content
                     div.video__menu
                         if loggedUser && loggedUser.id !== video.creator.id 
                             if loggedUser.subscribe.indexOf(video.creator._id)===-1
-                                button.sbtn.subscribe Subscribe
+                                button.sbtn.subscribe(data-id=video.creator._id) Subscribe
                             else
-                                button.sbtn.subscribed Subscribed
+                                button.sbtn.subscribed(data-id=video.creator._id) Subscribed
                         button.video__up
                             if loggedUser
                                 if video.like.indexOf(loggedUser.id)===-1

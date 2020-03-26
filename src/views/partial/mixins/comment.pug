@@ -2,9 +2,11 @@ mixin comment(comment={})
     .comment__wrapper(id=comment.id)
         .comment__body
             .comment__author
-                img(src=comment.creator.avatarUrl)
+                a(href=`/users/${comment.creator.id}`)
+                    img(src=comment.creator.avatarUrl)
             .comment__main
-                p.comment__header=comment.creator.name
+                a(href=`/users/${comment.creator.id}`)
+                    p.comment__header=comment.creator.name
                 p.comment__content=comment.text
                 .comment__time__wrapper
                     p.comment__created=`${moment(comment.createdAt).format("YYYY/MM/DD HH:MM:SS")}`

@@ -3,6 +3,7 @@ import getBlobDuration from "get-blob-duration";
 
 const videoContainer = document.querySelector("#js__player"),
   videoPlayer = document.querySelector("#js__player video"),
+  videoControls = document.querySelector(".videoPlayer__controls"),
   playBtn = document.querySelector(".videoPlayer__column .fa-play"),
   muteBtn = document.querySelector(".videoPlayer__column .fa-volume-down"),
   fullBtn = document.querySelector(".videoPlayer__column .fa-expand"),
@@ -17,7 +18,9 @@ let time_id = undefined,
   cur_volume = 0.5,
   vol_status = "fa-volume-down",
   percentage = 0,
-  duration = 0.0;
+  duration = 0.0,
+  timeId = null,
+  stopped = false;
 
 const registerView = () => {
   const vid = window.location.href.split("/videos/")[1]; //pathname.slice(5,).split("/")[0];
@@ -244,6 +247,7 @@ const clickedBar = e => {
   progressBar.value = mouseX * 100; //current position on progress bar
   videoPlayer.currentTime = (progressBar.value * videoPlayer.duration) / 100; //set newTime to watch
 };
+
 const init = () => {
   videoPlayer.volume = cur_volume;
 
