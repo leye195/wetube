@@ -27,13 +27,9 @@ import moment from "moment";
     const { target } = e;
     let cid = findParent(target, "comment__wrapper").id;
     let text = findParent(target, "btn__container").previousSibling;
-    const response = await axios.post(
-      `/api/comment/${cid}/reply`,
-      {
-        content: text.value
-      },
-      { withCredentials: true }
-    );
+    const response = await axios.post(`/api/comment/${cid}/reply`, {
+      content: text.value
+    });
     if (response.status === 200) {
       text.value = "";
     }

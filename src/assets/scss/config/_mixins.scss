@@ -2,7 +2,7 @@
 
 @mixin flex($a, $b, $c) {
   display: flex;
-  flex-direction: $a;
+  flex-direction: $a !important;
   align-items: $b;
   justify-content: $c;
 }

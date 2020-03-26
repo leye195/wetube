@@ -1,28 +1,99 @@
-.video-detail__side {
-  width: 200px;
-  margin-top: 10px;
-  padding-left: 10px;
-  border-left: 3px solid #bcbcf1;
-  overflow: scroll;
-  .videoBlock {
-    margin-bottom: 20px;
-    video {
-      border-radius: 20px;
-      border: 5px solid #979afb85;
-    }
-    .video__context {
+@include mobile {
+  .video-detail__side {
+    width: 80%;
+    margin-top: 10px;
+    padding: 20px 0;
+    overflow: scroll;
+    &::before {
+      content: "";
+      width: 100%;
+      height: 0px;
+      border: 1px solid #ffffffe8;
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      .videoBlock__title {
-        margin: {
-          right: 5px;
-          bottom: 0px;
+      margin-bottom: 10px;
+    }
+    .videoBlock {
+      margin-bottom: 20px;
+      video {
+        border-radius: 20px;
+        border: 5px solid #979afb85;
+      }
+      .video__context {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .videoBlock__title {
+          margin: {
+            right: 5px;
+            bottom: 0px;
+          }
+          white-space: pre;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 120px;
         }
-        white-space: pre;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        width: 120px;
+      }
+    }
+  }
+}
+@include tablet {
+  .video-detail__side {
+    width: 200px;
+    margin-top: 10px;
+    padding-left: 10px;
+    border-left: 3px solid #bcbcf1;
+    overflow: scroll;
+    .videoBlock {
+      margin-bottom: 20px;
+      video {
+        border-radius: 20px;
+        border: 5px solid #979afb85;
+      }
+      .video__context {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .videoBlock__title {
+          margin: {
+            right: 5px;
+            bottom: 0px;
+          }
+          white-space: pre;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 120px;
+        }
+      }
+    }
+  }
+}
+@include desktop {
+  .video-detail__side {
+    width: 200px;
+    margin-top: 10px;
+    padding-left: 10px;
+    border-left: 3px solid #bcbcf1;
+    overflow: scroll;
+    .videoBlock {
+      margin-bottom: 20px;
+      video {
+        border-radius: 20px;
+        border: 5px solid #979afb85;
+      }
+      .video__context {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .videoBlock__title {
+          margin: {
+            right: 5px;
+            bottom: 0px;
+          }
+          white-space: pre;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 120px;
+        }
       }
     }
   }

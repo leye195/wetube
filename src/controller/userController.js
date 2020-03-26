@@ -17,6 +17,7 @@ export const postJoin = async (req, res, next) => {
     try {
       const user = await User({ name, email });
       await User.register(user, password1); //User Object,password
+      console.log(user);
       next();
     } catch (error) {
       console.log(error);
@@ -155,7 +156,8 @@ export const postkakaoLogin = (req, res) => {
 export const logout = (req, res) => {
   req.flash("info", "Logged Out, See you later");
   req.logout();
-  res.redirect(routes.home);
+  res.status(200).json();
+  //res.redirect(routes.home);
 };
 export const users = (req, res) => {
   res.render("users", { pageTitle: "Users" });
@@ -285,19 +287,16 @@ export const postSubscribe = async (req, res) => {
   try {
     const user = await userModel.findOne({ _id: uid });
     if (req.user.subscribe.indexOf(user._id) === -1) {
-      //console.log(1);
       user.subscribed.push(req.user._id);
       req.user.subscribe.push(user._id);
       user.save();
       req.user.save();
       res.status(200).json({ subscribe: 1 });
     } else {
-      //console.log(2);
       user.subscribed.splice(user.subscribed.indexOf(req.user._id), 1);
       req.user.subscribe.splice(req.user.subscribe.indexOf(user._id), 1);
       user.save();
       req.user.save();
-      //console.log(req.user);
       res.status(200).json({ subscribe: 0 });
     }
   } catch (error) {

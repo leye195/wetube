@@ -3,6 +3,7 @@ const ul = document.querySelector(".user-content__container"),
   videoSection = document.querySelector(".video__section"),
   channelSection = document.querySelector(".channel__section"),
   infoSection = document.querySelector(".info__section");
+
 const handleHeaderClick = e => {
   const { target } = e,
     li = ul.querySelectorAll("li");
