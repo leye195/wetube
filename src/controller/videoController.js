@@ -2,13 +2,13 @@ import routes from "../routes";
 import videoModel from "../models/video";
 import commentModel from "../models/comment";
 import userModel from "../models/user";
-
+import replyModel from "../models/reply";
 export const home = async (req, res) => {
   try {
     const video = await videoModel
       .find({})
       .populate("creator")
-      .sort({ _id: -1 }); // -1을 준 이유는 descening
+      .sort({ _id: -1 }); // -1을 준 이유는 descenㅇing
     res.render("home", { pageTitle: "Home", videos: video });
   } catch (error) {
     res.render("home", { pageTitle: "Home", videos: [] });
@@ -124,12 +124,20 @@ export const deleteVideo = async (req, res) => {
     if (String(video.creator) !== String(req.user._id)) {
       throw Error();
     } else {
+      const commentList = video.comments;
+      [].forEach.call(commentList, async v => {
+        await Promise.all([
+          replyModel.deleteMany({ comment: v }), //comment 관련 답글 삭제
+          commentModel.findByIdAndDelete(v) //video 관련 comment 삭제
+        ]);
+      });
       await videoModel.findOneAndDelete({ _id: id });
       req.user.videos.splice(req.user.videos.indexOf(id), 1);
       req.user.save();
       res.redirect(routes.home);
     }
   } catch (error) {
+    console.log(error);
     res.redirect(routes.videoDetail(id));
   }
   res.render("deleteVideo", { pageTitle: "Delete Video" });
@@ -141,7 +149,6 @@ export const registerView = async (req, res) => {
       params: { id }
     } = req;
     const video = await videoModel.findById(id);
-    console.log(video);
     video.view += 1;
     video.save();
     res.status(200);
@@ -168,7 +175,6 @@ export const postComment = async (req, res) => {
     video.comments.push(newComment.id);
     newComment.save();
     video.save();
-    console.log(newComment);
     res.json(newComment);
   } catch (error) {
     res.status(400);
@@ -180,7 +186,7 @@ export const postDeleteComment = async (req, res) => {
     const {
       params: { id, cid }
     } = req;
-    console.log();
+    await replyModel.find({ comment: cid }).remove();
     await commentModel.findByIdAndDelete(cid);
     const video = await videoModel.findById(id);
     const idx = video.comments.indexOf(cid);

@@ -2,9 +2,7 @@
   .video-detail__wrapper {
     @include flex(column, center, none);
     .video-detail__container {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
+      @include flex(column, none, flex-start);
       width: 100%;
       max-width: 800px;
       margin: 10px auto;
@@ -81,12 +79,9 @@
   }
 }
 .video-detail__wrapper {
-  display: flex;
-  flex-direction: row;
+  @include flex(row, none, none);
   .video-detail__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    @include flex(column, none, flex-start);
     width: 100%;
     max-width: 800px;
     margin: 10px auto;

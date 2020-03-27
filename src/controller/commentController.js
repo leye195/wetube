@@ -6,7 +6,7 @@ export const postLikeComment = async (req, res, next) => {
       params: { id },
       user
     } = req;
-    console.log(id);
+    //console.log(id);
     const comment = await commentModel.findOne({ _id: id });
     if (!comment) res.status(403).end("comment does not exsit");
     if (comment.like.indexOf(user.id) === -1) {

@@ -17,7 +17,7 @@ export const postJoin = async (req, res, next) => {
     try {
       const user = await User({ name, email });
       await User.register(user, password1); //User Object,password
-      console.log(user);
+      //console.log(user);
       next();
     } catch (error) {
       console.log(error);

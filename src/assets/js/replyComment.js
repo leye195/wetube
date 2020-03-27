@@ -31,6 +31,10 @@ import moment from "moment";
       content: text.value
     });
     if (response.status === 200) {
+      const p = findParent(target, "comment__reply__form").nextSibling
+        .firstChild;
+      const num = p.innerText.split(" ")[0];
+      p.innerText = `${parseInt(num, 10) + 1} Replies`;
       text.value = "";
     }
   };

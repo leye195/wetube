@@ -9,10 +9,7 @@
   }
 }
 .thumb-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  @include flex(row, center, center);
   margin-bottom: 15px;
   .preview,
   input[type="file"] {

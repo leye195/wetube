@@ -13,16 +13,14 @@
     background-color: $white;
     box-shadow: 2px 3px 14px 1px #0000002b;
     a {
-      display: flex;
-      flex-direction: row;
+      @include flex(row, none, none);
       video {
         max-width: 300px !important;
         margin-bottom: 0;
         margin-right: 20px;
       }
       .video__context {
-        display: flex;
-        flex-direction: column;
+        @include flex(column, none, none);
         width: 100%;
         .videoBlock__title {
           font-weight: 400;

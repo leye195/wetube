@@ -48,6 +48,7 @@
             margin: 5px 5px;
             font-weight: 500;
             font-size: 0.75rem;
+            display: inline;
             cursor: pointer;
           }
           .comment__content {
@@ -162,6 +163,7 @@
           width: 100%;
           font-size: 15px;
           .comment__header {
+            display: inline;
             margin: 10px 5px;
             font-weight: 500;
             cursor: pointer;
@@ -279,6 +281,7 @@
           .comment__header {
             margin: 10px 5px;
             font-weight: 500;
+            display: inline;
             cursor: pointer;
           }
           .comment__content {

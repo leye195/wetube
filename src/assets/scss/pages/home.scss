@@ -10,14 +10,13 @@
 @include tablet {
   .videos {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(122px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
   }
   .home {
     .videoBlock:first-child {
       width: 50vw;
-      grid-column: 1/7;
-      justify-self: center;
+      grid-column: 1/4;
       margin-bottom: 15px;
     }
   }
@@ -25,14 +24,13 @@
 @include desktop {
   .videos {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
   }
   .home {
     .videoBlock:first-child {
       width: 50vw;
-      grid-column: 1/7;
-      justify-self: center;
+      grid-column: 1/5;
       margin-bottom: 15px;
     }
   }

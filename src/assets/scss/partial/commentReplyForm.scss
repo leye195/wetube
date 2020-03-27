@@ -1,15 +1,11 @@
 .comment__reply__form {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  @include flex(column, center, center);
   .reply__text {
     max-width: 100%;
     border-radius: 5px;
   }
   .btn__container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    @include flex(row, center, flex-end);
     width: 100%;
     & {
       .reply__submit,
@@ -36,8 +32,7 @@
       display: none;
     }
     .reply__body {
-      display: flex;
-      flex-direction: row;
+      @include flex(row, none, none);
       margin-bottom: 10px;
       .reply__author {
         img {
